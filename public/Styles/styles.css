@@ -544,6 +544,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -618,6 +622,10 @@ video {
 
 .h-\[100vh\] {
   height: 100vh;
+}
+
+.h-\[200vh\] {
+  height: 200vh;
 }
 
 .w-\[100\%\] {
