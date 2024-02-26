@@ -552,6 +552,10 @@ video {
   position: relative;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .right-2 {
   right: 0.5rem;
 }
@@ -564,8 +568,9 @@ video {
   margin: 1.5rem;
 }
 
-.m-4 {
-  margin: 1rem;
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 
 .mx-auto {
@@ -611,20 +616,8 @@ video {
   display: none;
 }
 
-.h-8 {
-  height: 2rem;
-}
-
 .h-\[100vh\] {
   height: 100vh;
-}
-
-.h-4 {
-  height: 1rem;
-}
-
-.h-1 {
-  height: 0.25rem;
 }
 
 .w-\[100\%\] {
@@ -639,14 +632,12 @@ video {
   width: 50vw;
 }
 
-.max-w-\[45vw\] {
-  max-width: 45vw;
+.w-screen {
+  width: 100vw;
 }
 
-.scale-100 {
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+.max-w-\[45vw\] {
+  max-width: 45vw;
 }
 
 .items-center {
@@ -681,6 +672,10 @@ video {
   border-width: 1px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .border-zinc-700 {
   --tw-border-opacity: 1;
   border-color: rgb(63 63 70 / var(--tw-border-opacity));
@@ -689,6 +684,11 @@ video {
 .border-t-zinc-600 {
   --tw-border-opacity: 1;
   border-top-color: rgb(82 82 91 / var(--tw-border-opacity));
+}
+
+.border-b-zinc-600 {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(82 82 91 / var(--tw-border-opacity));
 }
 
 .bg-gray-100 {
@@ -759,6 +759,11 @@ video {
   padding-bottom: 1rem;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -769,6 +774,11 @@ video {
   line-height: 2.5rem;
 }
 
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -777,11 +787,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
 }
 
 .font-bold {
@@ -796,6 +801,11 @@ video {
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .text-white {
@@ -849,16 +859,6 @@ video {
   .dark\:bg-zinc-800 {
     --tw-bg-opacity: 1;
     background-color: rgb(39 39 42 / var(--tw-bg-opacity));
-  }
-
-  .dark\:bg-zinc-900 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(24 24 27 / var(--tw-bg-opacity));
-  }
-
-  .dark\:text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 
   .dark\:text-zinc-600 {
