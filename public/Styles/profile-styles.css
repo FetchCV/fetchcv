@@ -1,0 +1,15 @@
+@keyframes slide_right {
+   0% {
+      transform: translate(0);
+   }
+
+   100% {
+      transform: translate(40px);
+   }
+}
+
+.caution-tape {
+   background: url("/Images/Stripes.svg") repeat;
+   background-size: 40px 40px;
+   animation: slide_right 10s linear infinite;
+}

@@ -27,23 +27,7 @@ async function getToken(service) {
 }
 
 
-function newUsername() {
-   let usernameElement = document.getElementById("username") as HTMLInputElement;
-   if (usernameElement) {
-      username = usernameElement.value;
-      localStorage.setItem("savedUsername", JSON.stringify(username));
-      getUserInfo();
-   }
-}
 
-const usernameInput = document.getElementById("username");
-if (usernameInput) {
-   usernameInput.addEventListener("keydown", function (event) {
-      if (event.key == "Enter") {
-         newUsername();
-      }
-   });
-}
 
 async function getUserInfo() {
    if (!tokenRecieved) {
@@ -79,14 +63,6 @@ async function getUserInfo() {
    searchUsers();
 }
 
-
-window.addEventListener("load", () => {
-   if (localStorage.getItem("savedUsername")) {
-      username = JSON.parse(localStorage.getItem("savedUsername") as string);
-      getUserInfo();
-   }
-});
-
 function updateData() {
    (document.querySelector(".user-info") as HTMLElement).classList.remove("hidden");
    (document.querySelector(".profile-picture") as HTMLImageElement).src = userData.avatar_url;
@@ -118,7 +94,6 @@ async function getRepoStars(repos) {
    (document.querySelector(".profile-stars") as HTMLElement).textContent = totalStars.toString();
    return totalStars;
 }
-
 
 async function getRepoLangs(repos) {
    let langs = {};

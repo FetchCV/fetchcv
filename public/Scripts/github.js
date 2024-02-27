@@ -24,22 +24,6 @@ async function getToken(service) {
         console.error('Error fetching token:', response.statusText);
     }
 }
-function newUsername() {
-    let usernameElement = document.getElementById("username");
-    if (usernameElement) {
-        username = usernameElement.value;
-        localStorage.setItem("savedUsername", JSON.stringify(username));
-        getUserInfo();
-    }
-}
-const usernameInput = document.getElementById("username");
-if (usernameInput) {
-    usernameInput.addEventListener("keydown", function (event) {
-        if (event.key == "Enter") {
-            newUsername();
-        }
-    });
-}
 async function getUserInfo() {
     if (!tokenRecieved) {
         console.log('Waiting for token to be received...');
@@ -72,12 +56,6 @@ async function getUserInfo() {
     }
     searchUsers();
 }
-window.addEventListener("load", () => {
-    if (localStorage.getItem("savedUsername")) {
-        username = JSON.parse(localStorage.getItem("savedUsername"));
-        getUserInfo();
-    }
-});
 function updateData() {
     document.querySelector(".user-info").classList.remove("hidden");
     document.querySelector(".profile-picture").src = userData.avatar_url;

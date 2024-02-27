@@ -1,3 +1,10 @@
+quality of life
+- searching animation while loading
+- show errors to user
+
+my quality of life
+- generate js files in a subfolder
+
 features
 - saves locally so it does not use up api calls
 - connect replit
@@ -18,3 +25,4 @@ features
 - main page
 - add achievement/education blocks
 - export business card
+- less horrific white theme

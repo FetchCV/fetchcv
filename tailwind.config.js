@@ -4,10 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "theme": "#1deeee",
-        "theme-2": "#861dee",
-        "theme-3": "#ee1d1d",
-        "theme-4": "#86ee1d",
+        "theme": "#ef4444",
+        //icons are colored depending on who can see them and how important they are
+        "public": "#3b82f6",
+        "private": "#ef4444",
+        "tools": "#eab308",
       },
     },
   },
