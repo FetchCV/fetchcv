@@ -22,6 +22,7 @@ async function getToken(service) {
          }
       }
    } else {
+      showError("Token Error", "Failed to fetch token. Try reloading the page.", "bg-red-800");
       console.error('Error fetching token:', response.statusText);
    }
 }
@@ -35,7 +36,6 @@ async function getUserInfo() {
       setTimeout(getUserInfo, 200);
       return;
    }
-   console.log(tokenRecieved, TOKEN, header)
 
    try {
       const response = await fetch(`https://api.github.com/users/${username}`, header);
@@ -43,14 +43,20 @@ async function getUserInfo() {
          userData = await response.json();
          updateData();
          updateGithubStats();
+         await getRepoData();
+      } else if (response.status === 404) {
+         showError("Oh no!", "User does not exist. Try another username.", "bg-red-800");
       } else {
-         console.error("Failed to fetch user data. Status:", response.status);
+         showError("Connection Error", "Failed to fetch user data. Try reloading the page.", "bg-red-800");
+         console.error("Failed to fetch user data. Status:", response.status, response);
       }
    }
    catch (error) {
       console.log(error)
    }
+}
 
+async function getRepoData() {
    try {
       const response = await fetch(`https://api.github.com/users/${username}/repos`, header);
       const repos = await response.json();
@@ -58,9 +64,9 @@ async function getUserInfo() {
       getRepoStars(repos);
       getRepoLangs(repos);
    } catch (error) {
+      showError("Oh no!", "Could not get user repository data.", "bg-red-800");
       console.error('Error fetching data:', error);
    }
-   searchUsers();
 }
 
 function updateData() {
@@ -137,7 +143,7 @@ function generateLanguageElements(languages) {
       for (const lang of languages) {
          const langElement = document.createElement("li");
          langElement.textContent = `${lang[0]}: ${lang[1]}%`;
-         langElement.classList.add("inline-block", "bg-zinc-700", "px-2", "m-1", "py-1", "rounded-lg");
+         langElement.classList.add("inline-block", "bg-zinc-700", "px-2", "m-1", "py-1", "rounded-lg", "border-[1px]", "border-zinc-700", "border-t-zinc-600");
          langList.appendChild(langElement);
       }
    }
