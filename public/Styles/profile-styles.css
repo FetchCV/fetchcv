@@ -4,12 +4,12 @@
    }
 
    100% {
-      transform: translate(40px);
+      transform: translate(3em);
    }
 }
 
 .caution-tape {
    background: url("/Images/Stripes.svg") repeat;
-   background-size: 40px 40px;
+   background-size: 3em 3em;
    animation: slide_right 10s linear infinite;
 }
