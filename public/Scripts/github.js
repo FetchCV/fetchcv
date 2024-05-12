@@ -4,10 +4,10 @@ let totalStars = 0;
 let languages = [];
 let TOKEN;
 let tokenRecieved = false;
-let header;
+let header = {};
 getToken("github");
 async function getToken(service) {
-    console.log('Fetching token...');
+    console.log("Fetching token...");
     const response = await fetch(`/token/${service}`);
     if (response.ok) {
         const token = await response.text();
@@ -32,6 +32,7 @@ async function getUserInfo() {
         return;
     }
     try {
+        console.log(header);
         const response = await fetch(`https://api.github.com/users/${username}`, header);
         if (response.ok) {
             userData = await response.json();
@@ -48,7 +49,8 @@ async function getUserInfo() {
         }
     }
     catch (error) {
-        console.log(error);
+        showError("Connection Error", "Could not request user data.", "bg-red-800");
+        console.error("Failed to request user data. Error - ", error);
     }
 }
 async function getRepoData() {
@@ -64,14 +66,18 @@ async function getRepoData() {
     }
 }
 function updateData() {
+    if (!userData) {
+        showError("Oh no!", "Could get the user data, my bad", "bg-red-800");
+        return;
+    }
     document.querySelector(".user-info").classList.remove("hidden");
     document.querySelector(".profile-picture").src = userData.avatar_url;
     document.querySelector(".profile-name").textContent = userData.name;
     document.querySelector(".profile-handle").textContent = userData.login;
     document.querySelector(".profile-desc").textContent = userData.bio;
-    document.querySelector(".profile-repos").textContent = userData.public_repos;
-    document.querySelector(".profile-followers").textContent = userData.followers;
-    document.querySelector(".profile-following").textContent = userData.following;
+    document.querySelector(".profile-repos").textContent = userData.public_repos.toString();
+    document.querySelector(".profile-followers").textContent = userData.followers.toString();
+    document.querySelector(".profile-following").textContent = userData.following.toString();
     document.querySelector(".profile-location").textContent = userData.location;
     document.querySelector(".profile-email").textContent = userData.email;
     document.querySelector(".profile-website").textContent = "Personal Website";
@@ -122,8 +128,50 @@ function generateLanguageElements(languages) {
         for (const lang of languages) {
             const langElement = document.createElement("li");
             langElement.textContent = `${lang[0]}: ${lang[1]}%`;
-            langElement.classList.add("inline-block", "bg-zinc-700", "px-2", "m-1", "py-1", "rounded-lg", "border-[1px]", "border-zinc-700", "border-t-zinc-600");
+            langElement.classList.add("inline-block", "bg-zinc-200", "dark:bg-zinc-700", "px-2", "m-1", "py-1", "rounded-lg", "border-[1px]", "border-zinc-400", "dark:border-zinc-700", "border-t-zinc-300", "dark:border-t-zinc-600", "inline-flex", "items-center");
+            langElement.innerHTML = ` <i class="devicon-${getLangIcon(lang[0])}-plain mr-1.5"></i>` + langElement.textContent;
             langList.appendChild(langElement);
+        }
+    }
+    function getLangIcon(lang) {
+        switch (lang) {
+            case "JavaScript":
+                return "javascript";
+            case "TypeScript":
+                return "typescript";
+            case "EJS":
+            case "HTML":
+                return "html5";
+            case "CSS":
+                return "css3";
+            case "Python":
+                return "python";
+            case "Java":
+                return "java";
+            case "C":
+                return "c";
+            case "C++":
+                return "cplusplus";
+            case "Lua":
+                return "lua";
+            case "Shell":
+                return "bash";
+            case "Ruby":
+                return "ruby";
+            case "PHP":
+                return "php";
+            case "Swift":
+                return "swift";
+            case "Go":
+                return "go";
+            case "Rust":
+                return "rust";
+            case "Kotlin":
+                return "kotlin";
+            case "GDScript":
+                return "godot";
+            default:
+                return "gimp hidden";
         }
     }
 }
@@ -145,11 +193,13 @@ function updateGithubStats() {
     }
 }
 async function getRateLimit() {
-    const response = await fetch('https://api.github.com/rate_limit', header);
-    if (response.ok) {
-        const data = await response.json();
-    }
-    else {
-        console.error('Error fetching rate limit:', response.statusText);
+    if (header) {
+        const response = await fetch('https://api.github.com/rate_limit', header);
+        if (response.ok) {
+            const data = await response.json();
+        }
+        else {
+            console.error('Error fetching rate limit:', response.statusText);
+        }
     }
 }
