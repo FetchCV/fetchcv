@@ -9,7 +9,7 @@
 }
 
 .caution-tape {
-   background: url("/Images/Stripes.svg") repeat;
+   background: url("/images/Stripes.svg") repeat;
    background-size: 3em 3em;
    animation: slide_right 10s linear infinite;
 }

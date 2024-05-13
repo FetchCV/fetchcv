@@ -6,7 +6,7 @@
    "scripts": {
       "start": "node app.js",
       "watch-app": "nodemon app.js",
-      "watch-tailwind": "npx tailwindcss -i ./public/Styles/tailwind.config.css -o ./public/Styles/styles.css --watch",
+      "watch-tailwind": "npx tailwindcss -i ./public/styles/tailwind.config.css -o ./public/styles/styles.css --watch",
       "watch-typescript": "tsc -w",
       "watch": "npm-run-all --parallel watch-tailwind watch-typescript",
       "dev": "npm-run-all --parallel watch-app watch"
