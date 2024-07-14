@@ -1,36 +1,36 @@
 {
-   "name": "special-invention",
-   "version": "0.0.1",
-   "description": "Your developer profile",
-   "main": "app.js",
-   "scripts": {
-      "start": "node app.js",
-      "watch-app": "nodemon app.js",
-      "watch-tailwind": "npx tailwindcss -i ./public/styles/tailwind.config.css -o ./public/styles/styles.css --watch",
-      "watch-typescript": "tsc -w",
-      "watch": "npm-run-all --parallel watch-tailwind watch-typescript",
-      "dev": "npm-run-all --parallel watch-app watch"
-   },
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/FetchCV/special-invention.git"
-   },
-   "author": "Ave and Hamza",
-   "license": "GPL-3.0-or-later",
-   "bugs": {
-      "url": "https://github.com/FetchCV/special-invention/issues"
-   },
-   "homepage": "https://github.com/FetchCV/special-invention#readme",
-   "dependencies": {
-      "dotenv": "^16.4.5",
-      "express": "^4.18.2",
-      "node": "^21.6.2",
-      "tailwind": "^4.0.0"
-   },
-   "devDependencies": {
-      "kill-port": "^2.0.1",
-      "nodemon": "^3.1.0",
-      "npm-run-all": "^4.1.5",
-      "typescript": "^5.3.3"
-   }
+  "name": "fetchcv",
+  "version": "0.0.1",
+  "description": "Your developer profile",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "watch-app": "nodemon app.js",
+    "watch-tailwind": "npx tailwindcss -i ./public/styles/tailwind.config.css -o ./public/styles/styles.css --watch",
+    "watch-typescript": "tsc -w",
+    "watch": "npm-run-all --parallel watch-tailwind watch-typescript",
+    "dev": "npm-run-all --parallel watch-app watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FetchCV/special-invention.git"
+  },
+  "author": "Ave and Hamza",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/FetchCV/special-invention/issues"
+  },
+  "homepage": "https://github.com/FetchCV/special-invention#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "node": "^21.6.2",
+    "tailwind": "^4.0.0"
+  },
+  "devDependencies": {
+    "kill-port": "^2.0.1",
+    "nodemon": "^3.1.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.3.3"
+  }
 }

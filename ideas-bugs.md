@@ -20,7 +20,6 @@ features
 - edit image link and bio
 - show multiple usernames
 - shop top 8 repos
-- add built with codefetch branding
 - custom styles
 - main page
 - add achievement/education blocks
