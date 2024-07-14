@@ -13,17 +13,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FetchCV/special-invention.git"
+    "url": "git+https://github.com/FetchCV/fetchcv.git"
   },
   "author": "Ave and Hamza",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/FetchCV/special-invention/issues"
+    "url": "https://github.com/FetchCV/fetchcv/issues"
   },
-  "homepage": "https://github.com/FetchCV/special-invention#readme",
+  "homepage": "https://github.com/FetchCV/fetchcv#readme",
   "dependencies": {
+    "axios": "^1.7.2",
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.18.2",
+    "mongoose": "^8.5.1",
     "node": "^21.6.2",
     "tailwind": "^4.0.0"
   },
