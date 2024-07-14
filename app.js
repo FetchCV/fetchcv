@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 const app = express();
 require("dotenv").config();
@@ -21,6 +22,18 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/public");
 
+app.use(
+   session({
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: true,
+      cookie: {
+         secure: false, // This will only work if you have https enabled!
+         maxAge: 60000, // 1 min
+      },
+   }),
+);
+
 // Define routes and middleware here
 app.get("/", (req, res) => {
    res.sendFile(__dirname + "/public/index.html");
@@ -36,10 +49,7 @@ app.get("/token/:service", (req, res) => {
 });
 
 // GitHub OAuth
-const clientID = process.env.GITHUB_CLIENT_ID;
-const clientSecret = process.env.GITHUB_CLIENT_SECRET;
 let github_access_token = "not logged in";
-let github_user_data = {};
 
 function loggedIn() {
    if (github_access_token === "not logged in") {
@@ -48,8 +58,15 @@ function loggedIn() {
    return true;
 }
 
+app.get("/profile", (req, res) => {
+   if (!req.session.user) {
+      return res.send("log in");
+   }
+   return res.render("pages/profile", { userData: req.session.user });
+});
+
 app.get("/gh", (req, res) => {
-   res.render("pages/index", { client_id: clientID });
+   res.render("pages/index", { client_id: process.env.GITHUB_CLIENT_ID });
 });
 
 // Callback
@@ -59,7 +76,7 @@ app.get("/auth/github", (req, res) => {
 
    axios({
       method: "post",
-      url: `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${requestToken}`,
+      url: `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}&code=${requestToken}`,
       // Set the content type header, so that we get the response in JSON
       headers: {
          accept: "application/json",
@@ -78,22 +95,22 @@ app.get("/github/login", function (req, res) {
          Authorization: "token " + github_access_token,
       },
    }).then((response) => {
-      github_user_data = response.data;
-      githubOAuthLogin(res);
+      req.session.user = response.data;
+      githubOAuthLogin(req, res);
    });
 });
 
-async function githubOAuthLogin(res) {
-   let isAccount = await githubOAuthUserExists(github_user_data.id);
-   if (isAccount) res.render("pages/success", { userData: github_user_data });
-   else createGithubOAuthUser(github_user_data.id, res);
+async function githubOAuthLogin(req, res) {
+   let isAccount = await githubOAuthUserExists(req.session.user.id);
+   if (isAccount) res.render("pages/profile", { userData: req.session.user });
+   else createGithubOAuthUser(req.session.user.id, req, res);
 }
 
-function createGithubOAuthUser(githubId, res) {
+function createGithubOAuthUser(githubId, req, res) {
    const user = new User({ githubId: githubId });
    user.save().then((result) => {
       console.log("id is " + result.id);
-      res.render("pages/new-user", { userData: github_user_data });
+      res.render("pages/new-user", { userData: req.session.user });
    });
 }
 
