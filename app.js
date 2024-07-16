@@ -34,11 +34,24 @@ app.use(
    }),
 );
 
-// Define routes and middleware here
+// Public routes
 app.get("/", (req, res) => {
-   res.sendFile(__dirname + "/public/index.html");
+   res.render("home");
 });
 
+app.get("/gh-username-search", (req, res) => {
+   res.render("pages/gh-username-search");
+});
+
+app.get("/profile", (req, res) => {
+   if (!req.session.user) {
+      return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
+   }
+   return res.render("pages/profile", { userData: req.session.user });
+});
+
+
+// Token fetching stuff
 app.get("/token/:service", (req, res) => {
    const service = req.params.service;
    console.log(
@@ -48,27 +61,8 @@ app.get("/token/:service", (req, res) => {
    res.send(process.env[service.toUpperCase() + "_TOKEN"] || "No token found");
 });
 
+
 // GitHub OAuth
-let github_access_token = "not logged in";
-
-function loggedIn() {
-   if (github_access_token === "not logged in") {
-      return false;
-   }
-   return true;
-}
-
-app.get("/profile", (req, res) => {
-   if (!req.session.user) {
-      return res.send("log in");
-   }
-   return res.render("pages/profile", { userData: req.session.user });
-});
-
-app.get("/gh", (req, res) => {
-   res.render("pages/index", { client_id: process.env.GITHUB_CLIENT_ID });
-});
-
 // Callback
 app.get("/auth/github", (req, res) => {
    // The req.query object has the query params that were sent to this route.
@@ -77,22 +71,21 @@ app.get("/auth/github", (req, res) => {
    axios({
       method: "post",
       url: `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}&code=${requestToken}`,
-      // Set the content type header, so that we get the response in JSON
       headers: {
          accept: "application/json",
       },
    }).then((response) => {
-      github_access_token = response.data.access_token;
+      req.session.github_access_token = response.data.access_token;
       res.redirect("/github/login");
    });
 });
 
-app.get("/github/login", function (req, res) {
+app.get("/github/login", (req, res) => {
    axios({
       method: "get",
       url: `https://api.github.com/user`,
       headers: {
-         Authorization: "token " + github_access_token,
+         Authorization: "token " + req.session.github_access_token,
       },
    }).then((response) => {
       req.session.user = response.data;

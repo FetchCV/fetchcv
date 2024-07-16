@@ -1,17 +1,16 @@
 /** @type {import("tailwindcss").Config} */
 module.exports = {
-  content: ["./public/**/*.{html,js}"],
-  theme: {
-    extend: {
-      colors: {
-        "theme": "#ef4444",
-        //icons are colored depending on who can see them and how important they are
-        "public": "#3b82f6",
-        "private": "#ef4444",
-        "tools": "#eab308",
+   content: ["./public/**/*.{html,ejs,js}"],
+   theme: {
+      extend: {
+         colors: {
+            theme: "#ef4444",
+            //icons are colored depending on who can see them and how important they are
+            public: "#3b82f6",
+            private: "#ef4444",
+            tools: "#eab308",
+         },
       },
-    },
-  },
-  plugins: [],
-}
-
+   },
+   plugins: [],
+};
