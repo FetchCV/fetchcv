@@ -47,6 +47,7 @@ app.get("/profile", (req, res) => {
    if (!req.session.user) {
       return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
    }
+   console.log(req.session.user)
    return res.render("pages/profile", { userData: req.session.user });
 });
 
@@ -95,21 +96,19 @@ app.get("/github/login", (req, res) => {
 
 async function githubOAuthLogin(req, res) {
    let isAccount = await githubOAuthUserExists(req.session.user.id);
-   if (isAccount) res.render("pages/profile", { userData: req.session.user });
+   if (isAccount) res.redirect("/profile");
    else createGithubOAuthUser(req.session.user.id, req, res);
 }
 
 function createGithubOAuthUser(githubId, req, res) {
    const user = new User({ githubId: githubId });
    user.save().then((result) => {
-      console.log("id is " + result.id);
       res.render("pages/new-user", { userData: req.session.user });
    });
 }
 
 async function githubOAuthUserExists(githubId) {
    const user = await User.findOne({ githubId: githubId });
-   console.log(user !== null);
    return user !== null;
 }
 

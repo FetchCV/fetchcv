@@ -24,11 +24,10 @@
                <span class="material-symbols-rounded text-public">home</span>
             </div>
          </a>
-         <!-- User search (will be replaced when accounts are added) -->
-         <!--<strong>Name</strong>: <%= userData.name %><br>
-         <strong>Username</strong>: <%= userData.login %><br>
-           <strong>Company</strong>: <%= userData.company %><br>
-           <strong>Bio</strong>: <%= userData.bio %>   -->
+         <script>
+            let userDataWorking = `<%- JSON.stringify(userData) %>`;
+            let githubUserData = JSON.parse(userDataWorking);
+         </script>
       </div>
       <!-- Error box - hidden by default -->
       <div
@@ -99,8 +98,8 @@
    }
 </style>
 
-<script src="../scripts/main.js"></script>
-<script src="../scripts/github.js"></script>
+<script src="../scripts/profile.js"></script>
+<script src="../scripts/profile-github.js"></script>
 <script src="../scripts/gitlab.js"></script>
 
 </html>
