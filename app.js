@@ -47,18 +47,17 @@ app.get("/profile", (req, res) => {
    if (!req.session.user) {
       return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
    }
-   console.log(req.session.user)
    return res.render("pages/profile", { userData: req.session.user });
 });
 
+app.get("/user/github/:username", (req, res) => {
+   const username = req.params.username;
+   res.render("pages/user-profile", { username: username })
+});
 
 // Token fetching stuff
 app.get("/token/:service", (req, res) => {
    const service = req.params.service;
-   console.log(
-      service.toUpperCase() + "_TOKEN",
-      process.env[service.toUpperCase() + "_TOKEN"],
-   );
    res.send(process.env[service.toUpperCase() + "_TOKEN"] || "No token found");
 });
 

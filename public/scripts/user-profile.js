@@ -3,14 +3,7 @@
 //===============================================
 // First check for username
 window.addEventListener("load", () => {
-    if (localStorage.getItem("savedUsername")) {
-        username = JSON.parse(localStorage.getItem("savedUsername"));
-        getUserInfo();
-    }
-    else {
-        console.log("No username saved.");
-        showError("No username", "Please enter a username.", "bg-blue-800");
-    }
+    getUserInfo();
 });
 //===============================================
 // Setting username
@@ -20,7 +13,7 @@ function newUsername() {
     let usernameElement = document.getElementById("username");
     if (usernameElement) {
         username = usernameElement.value;
-        localStorage.setItem("savedUsername", JSON.stringify(username));
+        window.location.href = window.location.origin + "/user/github/" + username;
         getUserInfo();
     }
 }

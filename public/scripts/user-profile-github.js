@@ -1,5 +1,4 @@
 let userData; // global variable
-let username = "";
 let totalStars = 0;
 let languages = [];
 let TOKEN;
@@ -170,6 +169,8 @@ function generateLanguageElements(languages) {
                 return "kotlin";
             case "GDScript":
                 return "godot";
+            case "QML":
+                return "Qt";
             default:
                 return "gimp hidden";
         }
@@ -180,16 +181,16 @@ function updateGithubStats() {
     const githubStatsElement = document.querySelector(".github-stats");
     if (githubStatsElement) {
         githubStatsElement.innerHTML = `<picture>
-         <source
-            srcset="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=slateorange"
-            media="(prefers-color-scheme: dark)"
-         />
-         <source
-            srcset="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true"
-            media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-         />
-         <img src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true" />
-      </picture>`;
+          <source
+             srcset="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=slateorange"
+             media="(prefers-color-scheme: dark)"
+          />
+          <source
+             srcset="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true"
+             media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          />
+          <img src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true" />
+       </picture>`;
     }
 }
 async function getRateLimit() {
