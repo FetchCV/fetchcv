@@ -1,24 +1,12 @@
 //===============================================
-// On load
-//===============================================
-
-// First check for username
-window.addEventListener("load", () => {
-   getUserInfo();
-});
-
-
-//===============================================
-// Setting username
+// Username search
 //===============================================
 
 function newUsername() {
-   hideError();
    let usernameElement = document.getElementById("username") as HTMLInputElement;
    if (usernameElement) {
       username = usernameElement.value;
       window.location.href = window.location.origin + "/user/github/" + username;
-      getUserInfo();
    }
 }
 
@@ -30,5 +18,3 @@ if (usernameInput) {
       }
    });
 }
-
-

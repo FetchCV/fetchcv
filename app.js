@@ -102,7 +102,7 @@ async function githubOAuthLogin(req, res) {
 function createGithubOAuthUser(githubId, req, res) {
    const user = new User({ githubId: githubId });
    user.save().then((result) => {
-      res.render("pages/new-user", { userData: req.session.user });
+      res.render("pages/welcome", { userData: req.session.user });
    });
 }
 

@@ -1,13 +1,5 @@
 //===============================================
-// On load
-//===============================================
-// First check for username
-window.addEventListener("load", () => {
-    username = githubUserData.login;
-    getUserInfo();
-});
-//===============================================
-// Show user errors
+// Show errors to user
 //===============================================
 function showError(errorTitle, errorText, color) {
     let errorBox = document.querySelector(".error-box");
