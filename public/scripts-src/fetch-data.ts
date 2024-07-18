@@ -16,7 +16,6 @@ function getDescription() {
             return response.json();
         })
         .then(data => {
-            console.log(data);
             description = data.description;
         })
         .catch(console.error);

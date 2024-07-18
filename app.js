@@ -126,7 +126,6 @@ app.get("/get/description", (req, res) => {
    User.findOne({ githubId: req.session.user.id })
       .then((user) => {
          if (user) {
-            console.log(user.profile);
             res.json({ description: user.profile.description });
          } else {
             throw new Error("User not found");
@@ -153,7 +152,6 @@ app.post("/edit/description", (req, res) => {
          }
       })
       .then((savedUser) => {
-         console.log(savedUser);
          res.json({ message: "It worked!" });
       })
       .catch((err) => {

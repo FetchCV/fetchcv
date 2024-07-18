@@ -76,11 +76,13 @@
       </div>
       <!-- Edit panel, until I integrate it -->
       <div class="edit-controls shadow-2xl py-4 px-8 my-2 bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md hidden user-info">
+         <div class="changes-saved-banner hidden p-4 my-2 bg-blue-300 border-2 border-blue-500 rounded-md">Changes saved!</div>
          <div>
             <h2 class="text-zinc-500">Edit description</h2>
-            <div>
-               <!-- set value to current through code -->
-               <input onKeyDown="if (event.keyCode == 13) editDescription(this.value)" class="edit-description w-full" type="text">
+            <div class="flex w-full justify-center items-center bg-white rounded-md overflow-hidden">
+               <input id="edit-description" maxlength="500" onKeyDown="if (event.keyCode == 13) editDescription(this.value)" class="p-2 bg-none edit-description w-full border-blue-500 focus:border-b-2 focus:outline-none" type="text">
+               <span title="Save" tabindex="0" class="material-symbols-rounded text-public mr-2" onclick="editDescription(document.querySelector('#edit-description').value)">save</span>
+               <span title="Revert to GitHub bio" tabindex="0" class="material-symbols-rounded text-public mr-2" onclick="revertDescriptionToGitHubBio()">refresh</span>
             </div>
          </div>
       </div>

@@ -9,7 +9,7 @@ function updateData() {
    (document.querySelector(".profile-picture") as HTMLImageElement).src = userData.avatar_url;
    (document.querySelector(".profile-name") as HTMLElement).textContent = userData.name;
    (document.querySelector(".profile-handle") as HTMLElement).textContent = userData.login;
-   (document.querySelector(".profile-desc") as HTMLElement).textContent = description || userData.bio;
+   updateDescription();
 
    (document.querySelector(".profile-repos") as HTMLElement).textContent = userData.public_repos.toString();
 
@@ -23,6 +23,11 @@ function updateData() {
    (document.querySelector(".profile-github") as HTMLAnchorElement).textContent = "Github Profile";
    (document.querySelector(".profile-website") as HTMLAnchorElement).href = userData.blog;
    (document.querySelector(".profile-github") as HTMLAnchorElement).href = userData.html_url;
+}
+
+function updateDescription() {
+   console.log(description);
+   (document.querySelector(".profile-desc") as HTMLElement).textContent = description || userData.bio;
 }
 
 async function getRepoStars(repos: any[]) {
