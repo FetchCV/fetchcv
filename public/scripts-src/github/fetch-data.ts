@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 interface UserData {
    avatar_url: string,
    name: string,

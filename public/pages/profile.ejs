@@ -74,6 +74,16 @@
             </div>
          </div>
       </div>
+      <!-- Edit panel, until I integrate it -->
+      <div class="edit-controls shadow-2xl py-4 px-8 my-2 bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md hidden user-info">
+         <div>
+            <h2 class="text-zinc-500">Edit description</h2>
+            <div>
+               <!-- set value to current through code -->
+               <input onKeyDown="if (event.keyCode == 13) editDescription(this.value)" class="edit-description w-full" type="text">
+            </div>
+         </div>
+      </div>
       <!-- Branding -->
       <div
          class="flex w-full py-4 justify-center items-center shadow-lg dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md">
@@ -84,12 +94,9 @@
    <!-- future settings panel (for use with customizing profile card and accessing account settings) -->
    <div class="flex fixed bottom-0 w-screen px-0 py-1 bg-zinc-700 border-[1px] border-zinc-700 border-t-zinc-600">
       <div class="absolute bottom-0 -z-10 -left-40 w-[140%] h-full caution-tape"></div>
-      <a href="">
-         <div
-            class="inline-flex justify-center transition-all p-2 mx-1 shadow-lg bg-zinc-800 border-[1px] border-zinc-700 border-t-zinc-600 rounded-md text-black">
-            <span class="material-symbols-rounded text-private">settings</span>
-         </div>
-      </a>
+      <div class="inline-flex justify-center transition-all p-2 mx-1 shadow-lg bg-zinc-800 border-[1px] border-zinc-700 border-t-zinc-600 rounded-md text-black">
+         <span class="material-symbols-rounded text-private" onclick="toggleEditMode()">settings</span>
+      </div>
    </div>
 </body>
 <style>
@@ -99,12 +106,15 @@
 </style>
 
 <script>
-let username;
-window.addEventListener("load", () => {
-   username = githubUserData.login;
-   getUserInfo();
-});
+   let username;
+   window.addEventListener("load", () => {
+      username = githubUserData.login;
+      getUserInfo();
+   });
 </script>
+<script src="/scripts/display-errors.js"></script>
 <script src="/scripts/github/fetch-data.js"></script>
+<script src="/scripts/fetch-data.js"></script>
 <script src="/scripts/github/display-data.js"></script>
+<script src="/scripts/edit-profile.js"></script>
 </html>

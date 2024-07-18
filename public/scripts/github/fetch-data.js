@@ -1,3 +1,4 @@
+// @ts-nocheck
 let userData; // global variable
 let totalStars = 0;
 let languages = [];

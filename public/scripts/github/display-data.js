@@ -1,3 +1,4 @@
+// @ts-nocheck
 function updateData() {
     if (!userData) {
         showError("Oh no!", "Could not get the user data, my bad", "bg-red-800");
@@ -7,7 +8,7 @@ function updateData() {
     document.querySelector(".profile-picture").src = userData.avatar_url;
     document.querySelector(".profile-name").textContent = userData.name;
     document.querySelector(".profile-handle").textContent = userData.login;
-    document.querySelector(".profile-desc").textContent = userData.bio;
+    document.querySelector(".profile-desc").textContent = description || userData.bio;
     document.querySelector(".profile-repos").textContent = userData.public_repos.toString();
     document.querySelector(".profile-followers").textContent = userData.followers.toString();
     document.querySelector(".profile-following").textContent = userData.following.toString();
@@ -87,7 +88,7 @@ function updateGithubStats() {
     const githubStatsElement = document.querySelector(".github-stats");
     if (githubStatsElement) {
         githubStatsElement.innerHTML = `<picture>
-           <source
+           <source 
               srcset="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=slateorange"
               media="(prefers-color-scheme: dark)"
            />

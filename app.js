@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const bodyParser = require("body-parser");
 
 const app = express();
 require("dotenv").config();
@@ -13,12 +14,19 @@ mongoose.connect(
 
 const userSchema = new mongoose.Schema({
    githubId: String,
+   profile: Object /*
+   {
+      description: something // will check if exists, if not use github
+   }
+   */
+
 });
 
 const User = mongoose.model("User", userSchema);
 
 // Serve static files from the "public" folder
 app.use(express.static("public"));
+app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/public");
 
@@ -110,6 +118,48 @@ async function githubOAuthUserExists(githubId) {
    const user = await User.findOne({ githubId: githubId });
    return user !== null;
 }
+
+
+
+// Get data
+app.get("/get/description", (req, res) => {
+   User.findOne({ githubId: req.session.user.id })
+      .then((user) => {
+         if (user) {
+            console.log(user.profile);
+            res.json({ description: user.profile.description });
+         } else {
+            throw new Error("User not found");
+         }
+      })
+      .catch((err) => {
+         console.log(err);
+      });
+});
+
+
+// Edit data
+app.post("/edit/description", (req, res) => {
+   const data = req.body;
+   User.findOne({ githubId: req.session.user.id })
+      .then((user) => {
+         if (user) {
+            user.profile.description = data.description;
+
+            user.markModified("profile");
+            return user.save();
+         } else {
+            throw new Error("User not found");
+         }
+      })
+      .then((savedUser) => {
+         console.log(savedUser);
+         res.json({ message: "It worked!" });
+      })
+      .catch((err) => {
+         console.log(err);
+      });
+});
 
 // Connect app
 app.listen(PORT, () => {

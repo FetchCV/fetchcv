@@ -1,3 +1,4 @@
+// @ts-nocheck
 //===============================================
 // On load
 //===============================================
@@ -16,7 +17,9 @@ function newUsername() {
    hideError();
    let usernameElement = document.getElementById("username") as HTMLInputElement;
    if (usernameElement) {
+      // @ts-ignore
       username = usernameElement.value;
+      // @ts-ignore
       window.location.href = window.location.origin + "/user/github/" + username;
       getUserInfo();
    }

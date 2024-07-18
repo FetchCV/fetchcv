@@ -1,3 +1,4 @@
+// @ts-nocheck
 const GITLAB_TOKEN = "glpat-mYhwXKb_9ksRbLZG-yrA";
 const gitlabHeader = {
     headers: {
