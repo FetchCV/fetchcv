@@ -60,6 +60,11 @@ app.get("/profile", (req, res) => {
 
 app.get("/user/github/:username", (req, res) => {
    const username = req.params.username;
+   res.render("pages/github-profile", { username: username })
+});
+
+app.get("/user/:username", (req, res) => {
+   const username = req.params.username;
    res.render("pages/user-profile", { username: username })
 });
 
