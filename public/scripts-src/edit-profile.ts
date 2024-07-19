@@ -1,3 +1,4 @@
+// functions
 function toggleEditMode() {
     let editPanel = document.querySelector(".edit-controls");
     if (editPanel?.classList.contains("hidden")) {

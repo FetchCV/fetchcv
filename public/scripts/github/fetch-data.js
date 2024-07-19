@@ -1,44 +1,10 @@
 // @ts-nocheck
-let userData; // global variable
-let totalStars = 0;
-let languages = [];
-let TOKEN;
-let tokenRecieved = false;
-let header = {};
-getToken("github");
-async function getToken(service) {
-    // console.log("Fetching token...");
-    const response = await fetch(`/token/${service}`);
-    if (response.ok) {
-        const token = await response.text();
-        tokenRecieved = true;
-        // console.log("Token received.");
-        TOKEN = token;
-        header = {
-            'headers': {
-                'Authorization': `token ${TOKEN}`
-            }
-        };
-    }
-    else {
-        showError("Token Error", "Failed to fetch token. Try reloading the page.", "bg-red-800");
-        console.error('Error fetching token:', response.statusText);
-    }
-}
 async function getUserInfo() {
-    if (!tokenRecieved) {
-        // console.log('Waiting for token to be received...');
-        setTimeout(getUserInfo, 200);
-        return;
-    }
     try {
         // console.log(header);
         const response = await fetch(`https://api.github.com/users/${username}`, header);
         if (response.ok) {
             userData = await response.json();
-            updateData();
-            updateGithubStats();
-            await getRepoData();
         }
         else if (response.status === 404) {
             showError("Oh no!", "User does not exist. Try another username.", "bg-red-800");
@@ -64,6 +30,15 @@ async function getRepoData() {
         showError("Oh no!", "Could not get user repository data.", "bg-red-800");
         console.error('Error fetching data:', error);
     }
+}
+async function getRepoStars(repos) {
+    for (const repo of repos) {
+        const repoResponse = await fetch(`https://api.github.com/repos/${repo.owner.login}/${repo.name}`, header);
+        const repoData = await repoResponse.json();
+        totalStars += repoData.stargazers_count;
+    }
+    document.querySelector(".profile-stars").textContent = totalStars.toString();
+    return totalStars;
 }
 async function getRepoLangs(repos) {
     let langs = {};

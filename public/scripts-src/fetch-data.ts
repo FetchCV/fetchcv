@@ -2,13 +2,15 @@ let description;
 
 window.onload = fetchData;
 
-function fetchData() {
-    getDescription();
+async function fetchData() {
+    console.log("Fetching data...");
+    await getDescription();
 }
 
-
-function getDescription() {
-    fetch("/get/description")
+async function getDescription() {
+    console.log("Fetching description...");
+    let githubId = await getId();
+    fetch(`/get/description/${githubId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Network error");
@@ -16,7 +18,20 @@ function getDescription() {
             return response.json();
         })
         .then(data => {
+            console.log("Data fetched:", data);
             description = data.description;
+
+            updateDescriptionElements();
         })
         .catch(console.error);
+}
+
+function updateDescriptionElements() {
+    console.log("Updating description elements...");
+    if (document.querySelector(".edit-description")) {
+        (document.querySelector(".edit-description") as HTMLInputElement).value = description;
+    }
+    if (document.querySelector(".profile-description")) {
+        (document.querySelector(".profile-description") as HTMLElement).textContent = description;
+    }
 }

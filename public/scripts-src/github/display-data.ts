@@ -26,19 +26,7 @@ function updateData() {
 }
 
 function updateDescription() {
-   console.log(description);
    (document.querySelector(".profile-desc") as HTMLElement).textContent = description || userData.bio;
-}
-
-async function getRepoStars(repos: any[]) {
-   for (const repo of repos) {
-      const repoResponse = await fetch(`https://api.github.com/repos/${repo.owner.login}/${repo.name}`, header);
-      const repoData = await repoResponse.json();
-      totalStars += repoData.stargazers_count;
-   }
-
-   (document.querySelector(".profile-stars") as HTMLElement).textContent = totalStars.toString();
-   return totalStars;
 }
 
 function generateLanguageElements(languages: [string, number][]) {

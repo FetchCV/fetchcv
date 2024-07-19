@@ -1,65 +1,10 @@
 // @ts-nocheck
-
-interface UserData {
-   avatar_url: string,
-   name: string,
-   login: string,
-   bio: string,
-   public_repos: number,
-   followers: number,
-   following: number,
-   location: string,
-   email: string,
-   blog: string,
-   html_url: string
-}
-
-let userData: UserData; // global variable
-let totalStars: number = 0;
-let languages: [string, number][] = [];
-let TOKEN: string;
-let tokenRecieved: boolean = false;
-let header: RequestInit | undefined = {};
-
-getToken("github");
-
-async function getToken(service: string) {
-   // console.log("Fetching token...");
-   const response = await fetch(`/token/${service}`);
-   if (response.ok) {
-      const token = await response.text() as string;
-      tokenRecieved = true;
-      // console.log("Token received.");
-      TOKEN = token;
-      header = {
-         'headers': {
-            'Authorization': `token ${TOKEN}`
-         }
-      }
-   } else {
-      showError("Token Error", "Failed to fetch token. Try reloading the page.", "bg-red-800");
-      console.error('Error fetching token:', response.statusText);
-   }
-}
-
-
-
-
 async function getUserInfo() {
-   if (!tokenRecieved) {
-      // console.log('Waiting for token to be received...');
-      setTimeout(getUserInfo, 200);
-      return;
-   }
-
    try {
       // console.log(header);
       const response = await fetch(`https://api.github.com/users/${username}`, header);
       if (response.ok) {
          userData = await response.json();
-         updateData();
-         updateGithubStats();
-         await getRepoData();
       } else if (response.status === 404) {
          showError("Oh no!", "User does not exist. Try another username.", "bg-red-800");
       } else {
@@ -84,6 +29,17 @@ async function getRepoData() {
       showError("Oh no!", "Could not get user repository data.", "bg-red-800");
       console.error('Error fetching data:', error);
    }
+}
+
+async function getRepoStars(repos: any[]) {
+   for (const repo of repos) {
+      const repoResponse = await fetch(`https://api.github.com/repos/${repo.owner.login}/${repo.name}`, header);
+      const repoData = await repoResponse.json();
+      totalStars += repoData.stargazers_count;
+   }
+
+   (document.querySelector(".profile-stars") as HTMLElement).textContent = totalStars.toString();
+   return totalStars;
 }
 
 async function getRepoLangs(repos: any[]) {

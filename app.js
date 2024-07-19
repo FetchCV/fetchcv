@@ -55,6 +55,13 @@ app.get("/profile", (req, res) => {
    if (!req.session.user) {
       return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
    }
+   return res.redirect("/user/" + req.session.user.login);
+});
+
+app.get("/edit-profile", (req, res) => {
+   if (!req.session.user) {
+      return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
+   }
    return res.render("pages/profile", { userData: req.session.user });
 });
 
@@ -127,8 +134,12 @@ async function githubOAuthUserExists(githubId) {
 
 
 // Get data
-app.get("/get/description", (req, res) => {
-   User.findOne({ githubId: req.session.user.id })
+app.get("/is-logged-in", (req, res) => {
+   res.json({ loggedIn: req.session.user ? true : false });
+});
+
+app.get("/get/description/:githubId", (req, res) => {
+   User.findOne({ githubId: req.params.gituhbId })
       .then((user) => {
          if (user) {
             res.json({ description: user.profile.description });

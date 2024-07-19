@@ -20,17 +20,7 @@ function updateData() {
     document.querySelector(".profile-github").href = userData.html_url;
 }
 function updateDescription() {
-    console.log(description);
     document.querySelector(".profile-desc").textContent = description || userData.bio;
-}
-async function getRepoStars(repos) {
-    for (const repo of repos) {
-        const repoResponse = await fetch(`https://api.github.com/repos/${repo.owner.login}/${repo.name}`, header);
-        const repoData = await repoResponse.json();
-        totalStars += repoData.stargazers_count;
-    }
-    document.querySelector(".profile-stars").textContent = totalStars.toString();
-    return totalStars;
 }
 function generateLanguageElements(languages) {
     const langList = document.querySelector(".profile-langs");

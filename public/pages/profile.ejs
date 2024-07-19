@@ -15,67 +15,22 @@
 </head>
 
 <body class="px-8 flex justify-center bg-zinc-50 dark:bg-zinc-900 dark:text-white">
-   <div class="mb-20">
-      <!-- top bar -->
-      <div class="flex my-2">
-         <a href="../">
-            <div
-               class="inline-flex justify-center transition-all p-2 mr-2 shadow-lg bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md dark:text-white">
-               <span class="material-symbols-rounded text-public">home</span>
-            </div>
-         </a>
          <script>
             let userDataWorking = `<%- JSON.stringify(userData) %>`;
             let githubUserData = JSON.parse(userDataWorking);
          </script>
-      </div>
-      <!-- Error box - hidden by default -->
+
+
+   <!-- home button -->
+   <a href="../">
       <div
-         class="error-box shadow-2xl py-4 px-8 my-2 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md hidden bg-blue-800 bg-red-800 bg-green-800">
-         <h1 class="error-title text-2xl font-mono">Oh no! Token retrival error</h1>
-         <h1 class="error-text font-mono">We could not fetch your data</h1>
+         class="fixed top-2 left-2 inline-flex justify-center transition-all p-2 mr-2 shadow-lg bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md dark:text-white">
+         <span class="material-symbols-rounded text-public">home</span>
       </div>
-
-
-      <!-- this should be working -->
-      <div id="root"></div>
-
-
-      <!-- Profile Card -->
-      <div
-         class="shadow-2xl py-4 px-8 my-2 bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md hidden user-info">
-         <div class="grid gap-6" style="grid-template-columns: 300px auto;">
-            <img
-               class="profile-picture w-[300px] shadow-2xl border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-full"
-               alt="Profile Picture">
-            <div class="max-w-[45vw]">
-               <h1 class="profile-name text-3xl font-bold">Name</h1>
-               <h1 class="profile-handle text-xl dark:text-zinc-600 font-bold">handle</h1>
-               <div class="profile-langs py-2 align-top"></div>
-               <p class="profile-desc text-lg"></p>
-               <br>
-               <hr>
-               <br>
-               <div>
-                  <p><span class="profile-repos"></span> repositories</p>
-               </div>
-               <br>
-               <hr>
-               <br>
-               <p><span class="profile-followers"></span> followers</p>
-               <p><span class="profile-following"></span> following</p>
-               <p><span class="profile-stars"></span> stars</p>
-               <p>location: <span class="profile-location"></span></p>
-               <p class="profile-email">Email</p>
-               <a class="profile-website text-theme underline">Website (ur/)</a><br>
-               <a class="profile-github text-theme underline">Github</a><br>
-               <br>
-               <div class="github-stats"></div>
-            </div>
-         </div>
-      </div>
-      <!-- Edit panel, until I integrate it -->
-      <div class="edit-controls shadow-2xl py-4 px-8 my-2 bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md hidden user-info">
+   </a>
+   <div class="mb-20">
+      <!-- Edit panel -->
+      <div class="edit-controls shadow-2xl py-4 px-8 my-2 bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md user-info">
          <div class="changes-saved-banner hidden p-4 my-2 bg-blue-300 border-2 border-blue-500 rounded-md">Changes saved!</div>
          <div>
             <h2 class="text-zinc-500">Edit description</h2>
@@ -85,19 +40,6 @@
                <span title="Revert to GitHub bio" tabindex="0" class="material-symbols-rounded text-public mr-2" onclick="revertDescriptionToGitHubBio()">refresh</span>
             </div>
          </div>
-      </div>
-      <!-- Branding -->
-      <div
-         class="flex w-full py-4 justify-center items-center shadow-lg dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md">
-         <p>Created with <code class="text-theme">FetchCV</code></p>
-
-      </div>
-   </div>
-   <!-- future settings panel (for use with customizing profile card and accessing account settings) -->
-   <div class="flex fixed bottom-0 w-screen px-0 py-1 bg-zinc-700 border-[1px] border-zinc-700 border-t-zinc-600">
-      <div class="absolute bottom-0 -z-10 -left-40 w-[140%] h-full caution-tape"></div>
-      <div class="inline-flex justify-center transition-all p-2 mx-1 shadow-lg bg-zinc-800 border-[1px] border-zinc-700 border-t-zinc-600 rounded-md text-black">
-         <span class="material-symbols-rounded text-private" onclick="toggleEditMode()">settings</span>
       </div>
    </div>
 </body>
@@ -115,8 +57,9 @@
    });
 </script>
 <script src="/scripts/display-errors.js"></script>
+<script src="/scripts/github/getToken.js"></script>
+<script src="/scripts/github/getId.js"></script>
 <script src="/scripts/github/fetch-data.js"></script>
 <script src="/scripts/fetch-data.js"></script>
-<script src="/scripts/github/display-data.js"></script>
 <script src="/scripts/edit-profile.js"></script>
 </html>

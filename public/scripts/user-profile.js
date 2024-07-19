@@ -1,12 +1,5 @@
 // @ts-nocheck
 //===============================================
-// On load
-//===============================================
-// First check for username
-window.addEventListener("load", () => {
-    getUserInfo();
-});
-//===============================================
 // Setting username
 //===============================================
 function newUsername() {
@@ -17,7 +10,6 @@ function newUsername() {
         username = usernameElement.value;
         // @ts-ignore
         window.location.href = window.location.origin + "/user/github/" + username;
-        getUserInfo();
     }
 }
 const usernameInput = document.getElementById("username");
