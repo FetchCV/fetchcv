@@ -88,14 +88,17 @@
          <p>Created with <code class="text-theme">FetchCV</code></p>
 
       </div>
-         <!-- future settings panel (for use with customizing profile card and accessing account settings) -->
-   <div class="settings-toolbar hidden flex fixed bottom-0 w-screen px-0 py-1 bg-zinc-700 border-[1px] border-zinc-700 border-t-zinc-600">
-      <div class="absolute bottom-0 -z-10 -left-40 w-[140%] h-full caution-tape"></div>
-      <div class="inline-flex justify-center transition-all p-2 mx-1 shadow-lg bg-zinc-800 border-[1px] border-zinc-700 border-t-zinc-600 rounded-md text-black">
-         <span class="material-symbols-rounded text-private" onclick="toggleEditMode()">settings</span>
-      </div>
    </div>
-
+   <!-- future settings panel (for use with customizing profile card and accessing account settings) -->
+   <div
+      class="settings-toolbar hidden flex fixed bottom-0 w-screen px-0 py-1 bg-zinc-700 border-[1px] border-zinc-700 border-t-zinc-600">
+      <div class="absolute bottom-0 -z-10 -left-40 w-[140%] h-full caution-tape"></div>
+      <div
+         class="inline-flex justify-center transition-all p-2 mx-1 shadow-lg bg-zinc-800 border-[1px] border-zinc-700 border-t-zinc-600 rounded-md text-black">
+         <span class="material-symbols-rounded text-private" onclick="
+   window.location.href = window.location.origin + '/edit-profile';
+">settings</span>
+      </div>
    </div>
 </body>
 <style>
@@ -112,4 +115,5 @@
 <script src="/scripts/github/displayData.js"></script>
 <script src="/scripts/userProfile.js"></script>
 <script src="/scripts/showEditProfile.js"></script>
+
 </html>

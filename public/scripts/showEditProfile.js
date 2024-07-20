@@ -1,6 +1,6 @@
 async function isLoggedIn() {
-    let loggedIn;
-    fetch("/is-logged-in")
+    let loggedIn = "no";
+    await fetch("/is-logged-in")
         .then(response => {
         if (!response.ok) {
             throw new Error("Network error");
@@ -10,7 +10,9 @@ async function isLoggedIn() {
         .then(data => {
         loggedIn = data.loggedIn;
     })
-        .catch(console.error);
+        .catch(error => {
+        console.error(error);
+    });
     return loggedIn;
 }
 async function checkUser() {
