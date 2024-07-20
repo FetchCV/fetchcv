@@ -139,11 +139,12 @@ app.get("/is-logged-in", (req, res) => {
 });
 
 app.get("/get/description/:githubId", (req, res) => {
-   User.findOne({ githubId: req.params.gituhbId })
+   User.findOne({ githubId: req.params.githubId })
       .then((user) => {
          if (user) {
             res.json({ description: user.profile.description });
          } else {
+            res.json({ description: undefined });
             throw new Error("User not found");
          }
       })

@@ -16,7 +16,6 @@ async function searchUsers() {
         throw new Error(`User not found: ${username}`);
     }
     else {
-        // console.log(`Username: ${JSON.stringify(users)}`);
         return users[0];
     }
 }

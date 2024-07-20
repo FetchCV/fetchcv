@@ -1,7 +1,6 @@
 // @ts-nocheck
 async function getUserInfo() {
    try {
-      // console.log(header);
       const response = await fetch(`https://api.github.com/users/${username}`, header);
       if (response.ok) {
          userData = await response.json();

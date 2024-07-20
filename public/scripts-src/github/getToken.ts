@@ -4,12 +4,10 @@ let header: RequestInit | undefined = {};
 
 
 async function getToken(service: string) {
-   // console.log("Fetching token...");
    const response = await fetch(`/token/${service}`);
    if (response.ok) {
       const token = await response.text() as string;
       tokenRecieved = true;
-      // console.log("Token received.");
       TOKEN = token;
       header = {
          'headers': {
