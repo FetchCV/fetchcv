@@ -1,14 +1,3 @@
-// functions
-function toggleEditMode() {
-    let editPanel = document.querySelector(".edit-controls");
-    if (editPanel?.classList.contains("hidden")) {
-        editPanel?.classList.remove("hidden");
-        prepareEditMode();
-    }
-    else {
-        editPanel?.classList.add("hidden");
-    }
-}
 function showChangesBanner() {
     let banner = document.querySelector(".changes-saved-banner");
     toggleVisibility(banner);
