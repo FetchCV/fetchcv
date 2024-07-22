@@ -2,8 +2,12 @@
 //===============================================
 // Username search
 //===============================================
-let usernameElement = document.getElementById("user-name");
+const usernameElement = document.getElementById("user-name");
+const searchResultsElement = document.querySelector(".search-results");
 const usernameInput = document.getElementById("user-name");
+usernameElement.addEventListener("blur", (event) => {
+    hideElement(searchResultsElement);
+});
 if (usernameInput) {
     usernameInput.addEventListener("keyup", (event) => {
         if (usernameElement.value.length > 0) {
@@ -28,7 +32,6 @@ async function getUpdatedSearchResults(search) {
         console.error("Error fetching users - ", error); // should show to user
     }
 }
-let searchResultsElement = document.querySelector(".search-results");
 function showUpdatedSearchResults(users) {
     searchResultsElement.innerHTML = "";
     for (let i = 0; i < users.length; i++) {
