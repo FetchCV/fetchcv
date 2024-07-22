@@ -1,12 +1,15 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Github OAuth Redirect</title>
-  </head>
+<head>
+   <title>Github OAuth Redirect</title>
+</head>
+<%- include("../partials/navbar.ejs") %>
    <body>
       <p>
-         <strong>Welcome to FetchCV, </strong> <%= userData.name %>!<br>
-         <a href="/">Go to home</a>
+         <strong>Welcome to FetchCV, </strong>
+         <%= userData.name %>!<br>
+            <a href="/">Go to home</a>
       </p>
-  </body>
+   </body>
+
 </html>
