@@ -6,28 +6,18 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" type="text/css" href="../styles/tailwind.css">
    <link rel="stylesheet" href="../styles/profile-styles.css">
-   <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
    <link rel="icon" type="images/svg" href="images/logo.svg">
    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
    <title>My Profile | FetchCV</title>
 </head>
-
+<%- include("../partials/navbar.ejs") %>
 <body class="px-8 flex justify-center bg-zinc-50 dark:bg-zinc-900 dark:text-white">
          <script>
             let userDataWorking = `<%- JSON.stringify(userData) %>`;
             let githubUserData = JSON.parse(userDataWorking);
          </script>
 
-
-   <!-- home button -->
-   <a href="../">
-      <div
-         class="fixed top-2 left-2 inline-flex justify-center transition-all p-2 mr-2 shadow-lg bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md dark:text-white">
-         <span class="material-symbols-rounded text-public">home</span>
-      </div>
-   </a>
    <div class="mb-20">
       <!-- Edit panel -->
       <div class="edit-controls shadow-2xl py-4 px-8 my-2 bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md user-info">
