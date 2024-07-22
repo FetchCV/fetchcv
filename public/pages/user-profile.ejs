@@ -14,27 +14,10 @@
 <%- include("../partials/navbar.ejs") %>
 <body class="px-8 flex justify-center bg-zinc-50 dark:bg-zinc-900 dark:text-white">
    <div class="mb-20">
-      <!-- top bar -->
-      <div class="flex my-2">
-         <a href="/">
-            <div
-               class="inline-flex justify-center transition-all p-2 mr-2 shadow-lg bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md dark:text-white">
-               <span class="material-symbols-rounded text-public">home</span>
-            </div>
-         </a>
-         <!-- User search (will be replaced when accounts are added) -->
-         <div
-            class="flex w-full justify-center items-center shadow-lg bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md">
-            <input class="px-6 py-2 text-base bg-transparent w-[100%]" type="text" id="username"
-               placeholder="Enter a GitHub username">
-            <span tabindex="0" class="material-symbols-rounded text-public mr-2"
-               onclick="newUsername()">person_search</span>
-         </div>
          <script>
             let usernameJSON = `<%- JSON.stringify(username) %>`;
             let username = JSON.parse(usernameJSON);
          </script>
-      </div>
       <!-- Error box - hidden by default -->
       <div
          class="error-box shadow-2xl py-4 px-8 my-2 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md hidden bg-blue-800 bg-red-800 bg-green-800">
@@ -42,9 +25,6 @@
          <h1 class="error-text font-mono">We could not fetch your data</h1>
       </div>
 
-
-      <!-- this should be working -->
-      <div id="root"></div>
 
 
       <!-- Profile Card -->
@@ -111,7 +91,6 @@
 <script src="/scripts/github/fetchData.js"></script>
 <script src="/scripts/fetchData.js"></script>
 <script src="/scripts/github/displayData.js"></script>
-<script src="/scripts/userProfile.js"></script>
 <script src="/scripts/showEditProfile.js"></script>
 
 </html>
