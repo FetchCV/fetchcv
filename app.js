@@ -47,10 +47,6 @@ app.get("/", (req, res) => {
    res.render("home");
 });
 
-app.get("/gh-username-search", (req, res) => {
-   res.render("pages/gh-username-search");
-});
-
 app.get("/profile", (req, res) => {
    if (!req.session.user) {
       return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });

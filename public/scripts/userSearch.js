@@ -7,9 +7,11 @@ const usernameInput = document.getElementById("user-name");
 if (usernameInput) {
     usernameInput.addEventListener("keyup", (event) => {
         if (usernameElement.value.length > 0) {
+            showElement(searchResultsElement);
             getUpdatedSearchResults(usernameElement.value);
         }
         else {
+            hideElement(searchResultsElement);
             showUpdatedSearchResults([]);
         }
     });
@@ -31,9 +33,11 @@ function showUpdatedSearchResults(users) {
     searchResultsElement.innerHTML = "";
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
-        console.log(user);
         let userElement = document.createElement("div");
         createSearchResultElement(userElement, user.handle, user.profile.description);
+        let divider = document.createElement("hr");
+        divider.classList.add("dark:border-zinc-700");
+        userElement.append(divider);
         searchResultsElement.append(userElement);
     }
     // Should only show if github username does exist
@@ -45,11 +49,21 @@ function showUpdatedSearchResults(users) {
 }
 function createSearchResultElement(element, name, description) {
     element.innerHTML = `
-      <div class="bg-red-500">
+      <div class="bg-white dark:bg-zinc-900 rounded-lg my-2 px-4 py-2">
          <a href="/user/${name}">
-            <p>${name}</p>
-            <p>${description}</p>
+            <p class="text-lg">${name}</p>
+            <p class="font-light">${description}</p>
          </a>
       </div>
    `;
+}
+function showElement(element) {
+    if (element.classList.contains("hidden")) {
+        element.classList.remove("hidden");
+    }
+}
+function hideElement(element) {
+    if (!element.classList.contains("hidden")) {
+        element.classList.add("hidden");
+    }
 }
