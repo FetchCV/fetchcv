@@ -736,6 +736,10 @@ video {
   cursor: pointer;
 }
 
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .items-center {
   align-items: center;
 }
@@ -1253,5 +1257,10 @@ video {
   .dark\:hover\:bg-zinc-700:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(63 63 70 / var(--tw-bg-opacity));
+  }
+
+  .dark\:hover\:bg-zinc-800:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
   }
 }
