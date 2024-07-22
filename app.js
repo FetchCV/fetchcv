@@ -14,12 +14,12 @@ mongoose.connect(
 
 const userSchema = new mongoose.Schema({
    githubId: String,
-   profile: Object /*
+   profile: Object, /*
    {
       description: something // will check if exists, if not use github
    }
    */
-
+   handle: String
 });
 
 const User = mongoose.model("User", userSchema);
@@ -120,7 +120,13 @@ async function githubOAuthLogin(req, res) {
 }
 
 function createGithubOAuthUser(githubId, req, res) {
-   const user = new User({ githubId: githubId });
+   const user = new User({
+      githubId: githubId,
+      handle: req.session.user.login,
+      profile: {
+         description: req.session.user.bio
+      }
+   });
    user.save().then((result) => {
       res.render("pages/welcome", { userData: req.session.user });
    });
@@ -176,7 +182,28 @@ app.post("/edit/description", (req, res) => {
       });
 });
 
+// Search
+app.get("/search/user/:username", (req, res) => {
+   const username = req.params.username;
+   const results = 15;
+   User.find({ handle: { $regex: "^" + username } })
+      .then((users) => {// should only send name and descr
+         res.json({ users: users.slice(0, results) });
+      })
+      .catch((err) => {
+         console.log(err);
+      });
+});
+
 // Connect app
 app.listen(PORT, () => {
    console.log("Server is running on port " + PORT);
 });
+
+
+// add new filed to existing schema members - remember to add to schema as well!
+//    User.updateMany(
+//       { handle: { $exists: false } },
+//       { $set: { handle: "hnasheralneam" } },
+//       { multi: true }
+//    ).then((oth) => { console.log(oth); }).catch((err) => { console.error("err-", err); });

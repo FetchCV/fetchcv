@@ -16,7 +16,7 @@ function newUsername() {
 
 const usernameInput = document.getElementById("username");
 if (usernameInput) {
-   usernameInput.addEventListener("keydown", function (event) {
+   usernameInput.addEventListener("keydown", (event) => {
       if (event.key == "Enter") {
          newUsername();
       }
