@@ -45,7 +45,7 @@ function showUpdatedSearchResults(users) {
       let userElement = document.createElement("div");
       createSearchResultElement(userElement, user.handle, user.profile.description);
       let divider = document.createElement("hr");
-      divider.classList.add("dark:border-zinc-700");
+      divider.classList.add("dark:border-far-b-dark", "border-close-b-light");
       userElement.append(divider);
       searchResultsElement.append(userElement);
    }
@@ -59,9 +59,9 @@ function showUpdatedSearchResults(users) {
 
 function createSearchResultElement(element, name, description) {
    element.innerHTML = `
-      <div class="bg-white dark:bg-zinc-900 rounded-lg my-2 px-4 py-2">
+      <div class="transition-all border-[1px] bg-close-light dark:bg-close-dark hover:bg-close-h-light hover:dark:bg-close-h-dark border-close-b-light dark:border-close-b-dark rounded-md my-2 p-2">
          <a href="/user/${name}">
-            <p class="text-lg">${name}</p>
+            <p class="font-semibold">${name}</p>
             <p class="font-light">${description}</p>
          </a>
       </div>
