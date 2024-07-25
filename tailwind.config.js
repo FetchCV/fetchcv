@@ -9,11 +9,11 @@ module.exports = {
                dark: "#09090b",
                light: "#d4d4d8",
                b: {
-                  dark: "18181b",
+                  dark: "#18181b",
                   light: "#71717a",
                },
                h: {
-                  dark: "18181b",
+                  dark: "#18181b",
                   light: "#a1a1aa",
                }
             },

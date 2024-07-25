@@ -45,7 +45,7 @@ function showUpdatedSearchResults(users) {
       let userElement = document.createElement("div");
       createSearchResultElement(userElement, user.handle, user.profile.description);
       let divider = document.createElement("hr");
-      divider.classList.add("dark:border-far-b-dark", "border-close-b-light");
+      divider.classList.add("dark:border-close-b-dark", "border-close-b-light");
       userElement.append(divider);
       searchResultsElement.append(userElement);
    }
