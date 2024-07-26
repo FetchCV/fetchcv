@@ -29,6 +29,7 @@
       "express-session": "^1.18.0",
       "mongoose": "^8.5.1",
       "node": "^21.6.2",
+      "nvm": "^0.0.4",
       "tailwind": "^4.0.0"
    },
    "devDependencies": {

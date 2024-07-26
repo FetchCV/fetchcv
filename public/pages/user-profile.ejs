@@ -12,7 +12,7 @@
    <title>My Profile | FetchCV</title>
 </head>
 <%- include("../partials/navbar.ejs") %>
-<body class="px-8 flex justify-center bg-zinc-50 dark:bg-zinc-900 dark:text-white">
+<body class="px-8 flex justify-center bg-far-light dark:bg-far-dark dark:text-white">
    <div class="mb-20">
          <script>
             let usernameJSON = `<%- JSON.stringify(username) %>`;
@@ -20,7 +20,7 @@
          </script>
       <!-- Error box - hidden by default -->
       <div
-         class="error-box shadow-2xl py-4 px-8 my-2 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md hidden bg-blue-800 bg-red-800 bg-green-800">
+         class="error-box py-4 px-8 my-2 border-[1px] border-close-b-light dark:border-close-b-dark rounded-md hidden bg-blue-800 bg-red-800 bg-green-800">
          <h1 class="error-title text-2xl font-mono">Oh no! Token retrival error</h1>
          <h1 class="error-text font-mono">We could not fetch your data</h1>
       </div>
@@ -29,10 +29,10 @@
 
       <!-- Profile Card -->
       <div
-         class="shadow-2xl py-4 px-8 my-2 bg-zinc-100 dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md hidden user-info">
+         class="py-4 px-8 my-2 bg-close-light dark:bg-close-dark border-[1px] border-close-b-light dark:border-close-b-dark rounded-md hidden user-info">
          <div class="grid gap-6" style="grid-template-columns: 300px auto;">
             <img
-               class="profile-picture w-[300px] shadow-2xl border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-full"
+               class="profile-picture w-[300px] border-[1px] border-close-b-light dark:border-close-b-dark rounded-full"
                alt="Profile Picture">
             <div class="max-w-[45vw]">
                <h1 class="profile-name text-3xl font-bold">Name</h1>
@@ -62,20 +62,18 @@
       </div>
       <!-- Branding -->
       <div
-         class="flex w-full py-4 justify-center items-center shadow-lg dark:bg-zinc-800 border-[1px] border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md">
+         class="flex w-full py-4 justify-center items-center bg-close-light dark:bg-close-dark border-[1px] border-close-b-light dark:border-close-b-dark rounded-md">
          <p>Created with <code class="text-theme">FetchCV</code></p>
 
       </div>
    </div>
    <!-- future settings panel (for use with customizing profile card and accessing account settings) -->
    <div
-      class="settings-toolbar hidden flex fixed bottom-0 w-screen px-0 py-1 bg-zinc-700 border-[1px] border-zinc-700 border-t-zinc-600">
+      class="settings-toolbar hidden left-0 right-0 fixed bottom-0 w-screen px-0 py-1 bg-closer-dark border-[1px] border-closer-b-dark">
       <div class="absolute bottom-0 -z-10 -left-40 w-[140%] h-full caution-tape"></div>
       <div
-         class="inline-flex justify-center transition-all p-2 mx-1 shadow-lg bg-zinc-800 border-[1px] border-zinc-700 border-t-zinc-600 rounded-md text-black">
-         <span class="material-symbols-rounded text-private" onclick="
-   window.location.href = window.location.origin + '/edit-profile';
-">settings</span>
+         class="inline-flex justify-center transition-all p-2 mx-1 border-[1px] bg-close-dark hover:bg-close-h-dark border-close-b-dark rounded-md">
+         <span class="material-symbols-rounded text-private" onclick="window.location.href = window.location.origin + '/edit-profile';">settings</span>
       </div>
    </div>
 </body>

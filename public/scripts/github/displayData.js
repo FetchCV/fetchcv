@@ -29,7 +29,7 @@ function generateLanguageElements(languages) {
         for (const lang of languages) {
             const langElement = document.createElement("li");
             langElement.textContent = `${lang[0]}: ${lang[1]}%`;
-            langElement.classList.add("inline-block", "bg-zinc-200", "dark:bg-zinc-700", "px-2", "m-1", "py-1", "rounded-lg", "border-[1px]", "border-zinc-400", "dark:border-zinc-700", "border-t-zinc-300", "dark:border-t-zinc-600", "inline-flex", "items-center");
+            langElement.classList.add("inline-block", "bg-closer-light", "dark:bg-closer-dark", "px-2", "m-1", "py-1", "rounded-lg", "border-[1px]", "border-closer-b-light", "dark:border-closer-b-dark", "inline-flex", "items-center");
             langElement.innerHTML = ` <i class="devicon-${getLangIcon(lang[0])}-plain mr-1.5"></i>` + langElement.textContent;
             langList.appendChild(langElement);
         }
