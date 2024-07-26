@@ -7,10 +7,44 @@
 const usernameElement = document.getElementById("user-name") as HTMLInputElement;
 const searchResultsElement = document.querySelector(".search-results");
 const usernameInput = document.getElementById("user-name");
+const searchParent = document.querySelector(".search-parent");
+let searchParentHovered = false;
 
 usernameElement.addEventListener("blur", (event) => {
-   hideElement(searchResultsElement);
+   if (!searchParentHovered) {
+      hideElement(searchResultsElement);
+   }
+   // setTimeout(() => {
+   //    hideElement(searchResultsElement);
+   // }, 120);
 });
+
+usernameElement.addEventListener("focus", (event) => {
+   if (usernameElement.value.length > 0) {
+      showElement(searchResultsElement);
+   }
+});
+
+searchParent.addEventListener("mouseover", () => {
+   searchParentHovered = true;
+});
+
+searchParent.addEventListener("mouseout", () => {
+   searchParentHovered = false;
+   if (usernameElement != document.activeElement) {
+      hideElement(searchResultsElement);
+   }
+});
+
+
+searchParent.addEventListener("keydown", (event) => {
+   if (event.key === "Enter") {
+      let activeElement = document.activeElement;
+      console.log(activeElement);
+      activeElement.firstElementChild.click();
+   }
+});
+
 
 if (usernameInput) {
    usernameInput.addEventListener("keyup", (event) => {
@@ -59,7 +93,7 @@ function showUpdatedSearchResults(users) {
 
 function createSearchResultElement(element, name, description) {
    element.innerHTML = `
-      <div class="transition-all border-[1px] bg-close-light dark:bg-close-dark hover:bg-close-h-light hover:dark:bg-close-h-dark border-close-b-light dark:border-close-b-dark rounded-md my-2 p-2">
+      <div tabindex="0" class="transition-all border-[1px] bg-close-light dark:bg-close-dark hover:bg-close-h-light hover:dark:bg-close-h-dark border-close-b-light dark:border-close-b-dark rounded-md my-2 p-2">
          <a href="/user/${name}">
             <p class="font-semibold">${name}</p>
             <p class="font-light">${description}</p>
