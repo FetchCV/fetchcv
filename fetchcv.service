@@ -1,0 +1,14 @@
+[Unit]
+Description=FetchCV
+
+[Service]
+ExecStart=/srv/www/fetchcv/app.js
+Restart=always
+User=nobody
+Group=nogroup
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/srv/www/fetchcv
+
+[Install]
+WantedBy=multi-user.target
