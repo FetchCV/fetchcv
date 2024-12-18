@@ -1,0 +1,1 @@
+let hasAccount: boolean = true;

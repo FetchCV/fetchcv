@@ -1,17 +1,6 @@
 let description;
-let githubId;
 
-window.onload = async () => {
-    await getToken("github");
-    githubId = await getId();
-    fetchData();
-};
-
-async function fetchData() {
-    await getDescription();
-}
-
-async function getDescription() {
+async function getDescription(githubId) {
    fetch(`/get/description/${githubId}`)
         .then(response => {
             if (!response.ok) {

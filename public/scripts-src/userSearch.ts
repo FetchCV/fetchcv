@@ -39,9 +39,7 @@ searchParent.addEventListener("mouseout", () => {
 
 searchParent.addEventListener("keydown", (event) => {
    if (event.key === "Enter") {
-      let activeElement = document.activeElement;
-      console.log(activeElement);
-      activeElement.firstElementChild.click();
+      document.querySelector(".search-results")?.firstElementChild.firstElementChild.click();
    }
 });
 
@@ -93,7 +91,7 @@ function showUpdatedSearchResults(users) {
 
 function createSearchResultElement(element, name, description) {
    element.innerHTML = `
-      <div tabindex="0" class="transition-all border-[1px] bg-close-light dark:bg-close-dark hover:bg-close-h-light hover:dark:bg-close-h-dark border-close-b-light dark:border-close-b-dark rounded-md my-2 p-2">
+      <div tabindex="0" class="transition-all border-[1px] bg-close-light dark:bg-close-dark hover:bg-close-h-light hover:dark:bg-close-h-dark border-close-b-light dark:border-close-b-dark rounded-md my-2 p-2" onclick="window.location.href='/user/${name}'">
          <a href="/user/${name}">
             <p class="font-semibold">${name}</p>
             <p class="font-light">${description}</p>

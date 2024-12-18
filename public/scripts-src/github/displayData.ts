@@ -99,6 +99,8 @@ function updateGithubStats() {
               media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
            />
            <img src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true" />
+           <br>
+           <iframe src="https://jandee.vercel.app/${username}?scheme=dark" style="width: 100%" frameborder="0"></iframe>
         </picture>`;
    }
 }

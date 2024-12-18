@@ -183,7 +183,7 @@ app.post("/edit/description", (req, res) => {
 app.get("/search/user/:username", (req, res) => {
    const username = req.params.username;
    const results = 15;
-   User.find({ handle: { $regex: "^" + username } })
+   User.find({ handle: { $regex: new RegExp("^" + username.toLowerCase(), "i") } })
       .then((users) => {// should only send name and descr
          res.json({ users: users.slice(0, results) });
       })
