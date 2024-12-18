@@ -83,7 +83,7 @@ function createSearchResultElement(element, name, description) {
       <div tabindex="0" class="transition-all border-[1px] bg-close-light dark:bg-close-dark hover:bg-close-h-light hover:dark:bg-close-h-dark border-close-b-light dark:border-close-b-dark rounded-md my-2 p-2">
          <a href="/user/${name}">
             <p class="font-semibold">${name}</p>
-            <p class="font-light">${description}</p>
+            <p class="font-light">${description == null ? "..." : description}</p>
          </a>
       </div>
    `;
