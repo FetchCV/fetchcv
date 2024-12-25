@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 require("dotenv").config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 mongoose.connect(
    `mongodb+srv://fetchcv:${process.env.MONGODB_PASSWORD}@cluster0.e1en0n4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
@@ -20,7 +20,11 @@ const userSchema = new mongoose.Schema({
       description: something // will check if exists, if not use github
    }
    */
-   handle: String
+   handle: String,
+   stats: Object /*{
+      visitors: Array,
+      visits: Number
+   } */
 });
 
 const User = mongoose.model("User", userSchema);
@@ -134,7 +138,9 @@ async function githubOAuthUserExists(githubId) {
    return user !== null;
 }
 
-
+function isLoggedIn(req) {
+   return req.session.user ? true : false;
+}
 
 // Get data
 app.get("/is-logged-in", (req, res) => {
@@ -150,6 +156,38 @@ app.get("/get/description/:githubId", (req, res) => {
             res.json({ description: undefined });
             throw new Error("User not found");
          }
+      })
+      .catch((err) => {
+         console.log(err);
+      });
+});
+
+// Get is deceptive, it will update as well
+app.get("/get/stats/:githubId", (req, res) => {
+   User.findOne({ githubId: req.params.githubId })
+      .then((user) => {
+         if (user) {
+            user.stats.visits += 1;
+
+            if (isLoggedIn(req)) {
+               if (!user.stats.visitors.includes(req.session.user.id)) {
+                  user.stats.visitors.push(req.session.user.id);
+               }
+            }
+
+            user.markModified("stats");
+            user.save();
+            return user.stats;
+         } else {
+            throw new Error("User not found");
+         }
+      })
+      .then((results) => {
+         console.log(results)
+         res.json({
+            visitors: results.visitors.length,
+            visits: results.visits
+         });
       })
       .catch((err) => {
          console.log(err);
@@ -194,13 +232,17 @@ app.get("/search/user/:username", (req, res) => {
 
 // Connect app
 app.listen(PORT, () => {
-   console.log("Server is running on port " + PORT);
+   console.log("Server is running on port " + PORT);   
 });
 
 
-// add new filed to existing schema members - remember to add to schema as well!
-//    User.updateMany(
-//       { handle: { $exists: false } },
-//       { $set: { handle: "hnasheralneam" } },
-//       { multi: true }
-//    ).then((oth) => { console.log(oth); }).catch((err) => { console.error("err-", err); });
+// Add item to existing schema members - remember to add to schema as well
+// User.updateMany(
+//    { stats: { $exists: true }},
+//    { $set: { stats: { visitors: [], visits: 0 } }},
+//    { multi: true }
+// ).then((oth) => {
+//    console.log(oth);
+// }).catch((err) => {
+//    console.error(err);
+// });

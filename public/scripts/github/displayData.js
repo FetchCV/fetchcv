@@ -79,6 +79,7 @@ function generateLanguageElements(languages) {
     }
 }
 function updateGithubStats() {
+    const theme = window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     const githubStatsElement = document.querySelector(".github-stats");
     if (githubStatsElement) {
         githubStatsElement.innerHTML = `<picture>
@@ -92,7 +93,7 @@ function updateGithubStats() {
            />
            <img src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true" />
            <br>
-           <iframe src="https://jandee.vercel.app/${username}?scheme=dark" style="width: 100%" frameborder="0"></iframe>
+           <iframe src="https://jandee.vercel.app/${username}?scheme=${theme}" style="width: 100%" frameborder="0"></iframe>
         </picture>`;
     }
 }

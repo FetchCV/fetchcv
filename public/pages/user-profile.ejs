@@ -31,9 +31,12 @@
       <div
          class="py-4 px-8 my-2 bg-close-light dark:bg-close-dark border-[1px] border-close-b-light dark:border-close-b-dark rounded-md hidden user-info">
          <div class="grid gap-6" style="grid-template-columns: 300px auto;">
-            <img
+            <div>
+               <img
                class="profile-picture w-[300px] border-[1px] border-close-b-light dark:border-close-b-dark rounded-full"
                alt="Profile Picture">
+               <p class="visitors-views text-center my-2 dark:text-zinc-400" title="Visits are counted for every logged in person that sees your page, views are counted for the number of times your page is viewed by anyone">-1 Visits | -1 Views</p>
+            </div>
             <div class="max-w-[45vw]">
                <h1 class="profile-name text-3xl font-bold">Name</h1>
                <h1 class="profile-handle text-xl dark:text-zinc-600 font-bold">handle</h1>
@@ -90,5 +93,5 @@
 <script src="/scripts/fetchData.js"></script>
 <script src="/scripts/github/displayData.js"></script>
 <script src="/scripts/showEditProfile.js"></script>
-
+<script src="/scripts/stats.js"></script>
 </html>
