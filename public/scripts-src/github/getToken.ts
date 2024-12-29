@@ -14,6 +14,7 @@ async function getToken(service: string) {
             'Authorization': `token ${TOKEN}`
          }
       }
+      console.log("Token Recieved");
    } else {
       showError("Token Error", "Failed to fetch token. Try reloading the page.", "bg-red-800");
       console.error('Error fetching token:', response.statusText);

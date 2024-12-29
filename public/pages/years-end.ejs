@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" type="text/css" href="../styles/tailwind.css">
+   <link rel="stylesheet" href="../styles/profile-styles.css">
+   <link rel="icon" type="images/svg" href="images/logo.svg">
+   <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+   <title>Year's End 2024 | FetchCV</title>
+</head>
+<style>
+* {
+    font-family: "Ubuntu", sans-serif;
+}
+
+.profile-picture {
+    position: absolute;
+    top: -9rem;
+    display: block;
+    padding: .6rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background-image: linear-gradient(145deg, #dc2626, #2563eb);
+}
+
+.profile-picture img {
+    box-shadow: 0 0 .4rem #000;
+}
+
+.user-name, .year {
+    background: linear-gradient(to bottom right, #FFF45A, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:transparent;
+    background-clip: text;
+}
+
+.loading {
+   width: 100px;
+   height: 100px;
+   background-color: #26de81;
+   border-radius: 12px;
+   animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+   0% {
+      transform: rotateX(0deg) rotateY(0deg);
+   }
+   50% {
+      transform: rotateX(0deg) rotateY(180deg);
+   }
+   100% {
+      transform: rotateX(180deg) rotateY(180deg);
+   }
+}
+</style>
+<%- include("../partials/navbar.ejs") %>
+<script>
+    let usernameJSON = `<%- JSON.stringify(username) %>`;
+    let username = JSON.parse(usernameJSON);
+</script>
+<body class="px-8 flex justify-center items-center bg-far-light dark:bg-far-dark dark:text-white min-h-screen">
+
+   <div class="mb-20">
+      <!-- Edit panel -->
+      <div class="content edit-controls min-h-[25rem] py-4 px-4 my-2 bg-close-light dark:bg-close-dark border-[1px] border-close-b-light dark:border-close-b-dark rounded-md user-info grid grid-cols-3 gap-6">
+        <div class="flex justify-center items-center text-center">
+            <div>
+                <div>
+                    <h2 class="active-days">xxx</h2>
+                    <p>Active days</p>
+                </div>
+                <br>
+                <p class="issues-opened-closed">xx issues opened, x closed</p>
+                <p class="pr-created">xx prs</p>
+                <br>
+                <p class="repos-contributed-to">contributed to x repos</p>
+            </div>
+        </div>
+        <div class="relative w-[18rem] text-center">
+            <div class="profile-picture bg-blue-600">
+                <img class="rounded-full" src="https://avatars.githubusercontent.com/u/68402033?v=4" alt="profile picture">
+            </div>
+            <br><br><br><br><br><br>
+            <div class="py-2">
+                <h1 class="text-3xl user-name"></h1>
+                <p class="user-description">description</p>
+                <br>
+                <p class="followers-following">xx followers - xx following</p>
+                <p class="repos-stars">xx repos - xxx stars</p>
+                <h2 class="pt-2 pb-0 text-6xl font-bold year">2024</h2>
+            </div>
+        </div>
+        <div class="flex justify-center items-center text-center">
+            <div>
+                <h2>Top languages</h2>
+                <div class="top-languages">
+                    <p>xxxxxxxx</p>
+                    <p>xxxxxx</p>
+                    <p>xxxxxxxxxxxxxxxx</p>
+                </div>
+                <div>
+                    <p class="stars-this-year">earned xx stars</p>
+                    <h2 class="commits-this-year">made xx commits</h2>
+                </div>
+                <h2>Top repositiories</h2>
+                <div class="top-repos">
+                    <p>xxxxxxxxxxx (x stars)</p>
+                    <p>xxxxxxxxxxxxxxxxxxx (x stars)</p>
+                    <p>xxxxxxxxxx (xx stars)</p>
+                </div>
+            </div>
+        </div>
+      </div>
+   </div>
+</body>
+<script>
+    window.addEventListener("load", () => {
+        document.querySelector(".user-name").textContent = username;
+    });
+    let yearsEnd = true;
+</script>
+<script src="/scripts/displayErrors.js"></script>
+<script src="/scripts/github/getToken.js"></script>
+<script src="/scripts/github/fetchData.js"></script>
+<script src="/scripts/years-end.js"></script>
+</html>

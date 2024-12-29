@@ -82,6 +82,11 @@ app.get("/token/:service", (req, res) => {
    res.send(process.env[service.toUpperCase() + "_TOKEN"] || "No token found");
 });
 
+app.get("/years-end/:username", (req, res) => {
+   const username = req.params.username;
+   res.render("pages/years-end", { username: username });
+});
+
 
 // GitHub OAuth
 // Callback
