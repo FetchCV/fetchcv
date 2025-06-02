@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const postsContainer = document.querySelector(".posts");
       if (postsContainer) {
         reponse.posts.reverse().forEach(async (post: PostData) => {
-          await fetch("https://api.github.com/users/hnasheralneam")
+          await fetch("https://api.github.com/users/" + post.authorHandle)
             .then(response => response.json())
             .then(data => {
               const avatarUrl = data.avatar_url;

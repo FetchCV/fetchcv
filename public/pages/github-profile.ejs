@@ -28,12 +28,22 @@
 
       <!-- Profile Card -->
       <div
-         class="shadow-2xl py-4 px-8 my-2 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-md hidden user-info">
-         <div class="grid gap-6" style="grid-template-columns: 300px auto;">
+         class="py-4 px-8 my-2 bg-close-light dark:bg-close-dark border border-close-b-light dark:border-close-b-dark rounded-md hidden user-info md:w-full sm:bg-blue-200 md:bg-red-200 lg:bg-green-200">
+         <div class="main-content grid gap-6">
+            <style>
+               .main-content {
+                  grid-template-columns: 300px auto;
+               }
+               @media screen and (max-width: 768px) {
+                  .main-content {
+                     grid-template-columns: 1fr;
+                  }
+               }
+            </style>
             <img
-               class="profile-picture w-[300px] shadow-2xl border border-zinc-300 dark:border-zinc-700 border-t-zinc-100 dark:border-t-zinc-600 rounded-full"
+               class="profile-picture mx-auto w-[300px] border border-close-b-light dark:border-close-b-dark rounded-full"
                alt="Profile Picture">
-            <div class="max-w-[45vw]">
+            <div class="max-w-full lg:max-w-[45vw]">
                <h1 class="profile-name text-3xl font-bold">Name</h1>
                <h1 class="profile-handle text-xl dark:text-zinc-600 font-bold">handle</h1>
                <div class="profile-langs py-2 align-top flex flex-wrap"></div>

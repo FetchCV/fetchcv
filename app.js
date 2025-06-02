@@ -336,6 +336,11 @@ app.get("/posts/get-all", (req, res) => {
       });
 });
 
+// Lost page
+app.get("*", (req, res) => {
+   res.render("pages/lost");
+});
+
 // Connect app
 app.listen(PORT, () => {
    console.log("Server is running on port " + PORT);

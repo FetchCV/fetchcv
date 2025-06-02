@@ -2,9 +2,8 @@
 <html lang="en">
 
 <head>
-   <link rel="stylesheet" href="styles/tailwind.css" />
-   <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="stylesheet" href="styles/tailwind.css" />
    <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&display=swap"
@@ -15,7 +14,7 @@
 </head>
 <%- include("../partials/navbar.ejs") %>
 
-   <body class="h-screen bg-far-light dark:bg-far-dark dark:text-white lg:px-[20vw] sm:px-0">
+   <body class="h-screen bg-far-light dark:bg-far-dark dark:text-white lg:px-[20vw] px-2 sm:px-0">
       <% if (userData) { %>
          <div
             class="mx-auto py-6 px-8 my-4 bg-zinc-100 dark:bg-far-h-dark border border-zinc-300 dark:border-zinc-700 rounded-md max-w-[600px]">
@@ -35,6 +34,11 @@
                   a post</button>
                <br><br>
             </form>
+         </div>
+      <% } else { %>
+         <div
+            class="mx-auto py-6 px-8 my-4 bg-zinc-100 dark:bg-far-h-dark border border-zinc-300 dark:border-zinc-700 rounded-md max-w-[600px]">
+            <h2 class="text-lg font-semibold">Log in or sign up to make a post</h2>
          </div>
       <% } %>
       <div class="posts"></div>

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const postsContainer = document.querySelector(".posts");
         if (postsContainer) {
             reponse.posts.reverse().forEach(async (post) => {
-                await fetch("https://api.github.com/users/hnasheralneam")
+                await fetch("https://api.github.com/users/" + post.authorHandle)
                     .then(response => response.json())
                     .then(data => {
                     const avatarUrl = data.avatar_url;
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // other stuff
 function createPostElement(data) {
     const postElement = document.createElement("div");
-    postElement.classList.add("mx-auto", "py-6", "px-12", "my-4", "bg-zinc-100", "dark:bg-far-h-dark", "border", "border-zinc-300", "dark:border-zinc-700", "rounded-md", "max-w-[600px]");
+    postElement.classList.add("mx-auto", "py-6", "px-4", "md:px-12", "my-4", "bg-zinc-100", "dark:bg-far-h-dark", "border", "border-zinc-300", "dark:border-zinc-700", "rounded-md", "max-w-[600px]");
     postElement.innerHTML = `
    <div class="grid" style="grid-template-columns: 4rem auto">
       <img class="m-[.3rem] w-[3.5rem] border border-far-b-dark rounded-full" src="${data.authorImage || "../images/logo.svg"}" alt="profile-picture">

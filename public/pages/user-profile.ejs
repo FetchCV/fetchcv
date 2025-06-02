@@ -12,7 +12,7 @@
    <title>My Profile | FetchCV</title>
 </head>
 <%- include("../partials/navbar.ejs") %>
-<body class="px-8 flex justify-center bg-far-light dark:bg-far-dark dark:text-white">
+<body class="px-4 md:px-8 flex justify-center bg-far-light dark:bg-far-dark dark:text-white">
    <div class="mb-20">
          <script>
             let usernameJSON = `<%- JSON.stringify(username) %>`;
@@ -29,15 +29,25 @@
 
       <!-- Profile Card -->
       <div
-         class="py-4 px-8 my-2 bg-close-light dark:bg-close-dark border border-close-b-light dark:border-close-b-dark rounded-md hidden user-info">
-         <div class="grid gap-6" style="grid-template-columns: 300px auto;">
+         class="py-4 px-8 my-2 bg-close-light dark:bg-close-dark border border-close-b-light dark:border-close-b-dark rounded-md hidden user-info md:w-full sm:bg-blue-200 md:bg-red-200 lg:bg-green-200">
+         <div class="main-content grid gap-6">
+            <style>
+               .main-content {
+                  grid-template-columns: 300px auto;
+               }
+               @media screen and (max-width: 768px) {
+                  .main-content {
+                     grid-template-columns: 1fr;
+                  }
+               }
+            </style>
             <div>
                <img
-               class="profile-picture w-[300px] border border-close-b-light dark:border-close-b-dark rounded-full"
+               class="profile-picture mx-auto w-[300px] border border-close-b-light dark:border-close-b-dark rounded-full"
                alt="Profile Picture">
                <p class="visitors-views text-center my-2 dark:text-zinc-400" title="Visits are counted for every logged in person that sees your page, views are counted for the number of times your page is viewed by anyone">-1 Visits | -1 Views</p>
             </div>
-            <div class="max-w-[45vw]">
+            <div class="max-w-full lg:max-w-[45vw]">
                <h1 class="profile-name text-3xl font-bold">Name</h1>
                <h1 class="profile-handle text-xl dark:text-zinc-600 font-bold">handle</h1>
                <div class="profile-langs py-2 align-top flex flex-wrap"></div>
@@ -56,7 +66,7 @@
                <p><span class="profile-stars"></span> stars</p>
                <p>location: <span class="profile-location"></span></p>
                <p class="profile-email">Email</p>
-               <a class="profile-website text-theme underline">Website (ur/)</a><br>
+               <a class="profile-website text-theme underline">Website</a><br>
                <a class="profile-github text-theme underline">Github</a><br>
                <br>
                <div class="github-stats"></div>

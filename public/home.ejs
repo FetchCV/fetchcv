@@ -16,13 +16,23 @@
 <%- include("partials/navbar.ejs") %>
 
    <body
-      class="flex justify-center items-center h-screen bg-far-light dark:bg-far-dark dark:text-white lg:px-[20vw] sm:px-0">
+      class="flex justify-center items-center md:h-screen bg-far-light dark:bg-far-dark dark:text-white lg:px-[20vw] sm:px-0">
       <!-- Page Card -->
       <div>
          <!-- Centered card -->
-         <div class="grid gap-16 px-4 py-10" style="grid-template-columns: 312px auto">
-            <img class="m-6 w-[300px] border border-far-b-dark rounded-full" src="images/logo.svg" alt="logo" />
-            <div class="my-auto">
+         <div class="card grid md:gap-16 md:px-4 text-center md:text-left">
+            <style>
+               .card {
+                  grid-template-columns: 312px auto;
+               }
+               @media screen and (max-width: 768px) {
+                  .card {
+                     grid-template-columns: 1fr;
+                  }
+               }
+            </style>
+            <img class="m-6 mx-auto w-[230px] md:w-[300px] border border-far-b-dark rounded-full" src="images/logo.svg" alt="logo" />
+            <div class="my-auto mx-6 md:mx-0 max-w-[700px]">
                <h1 class="text-4xl">FetchCV</h1>
                <h4 class="text-zinc-500 dark:text-zinc-300 italic">
                   Where people can find you

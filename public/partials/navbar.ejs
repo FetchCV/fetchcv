@@ -2,6 +2,11 @@
    body {
       padding-top: 4.5rem;
    }
+   @media screen and (max-width: 768px) {
+      body {
+         padding-top: 10rem;
+      }
+   }
 </style>
 
 <!-- Analytics -->
@@ -13,9 +18,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap"
    rel="stylesheet">
 
+<style>
+.navbar {
+   grid-template-columns: 28% 44% 28%;
+}
+@media screen and (max-width: 768px) {
+   .navbar {
+      grid-template-columns: 1fr;
+      text-align: center;
+   }
+}
+</style>
 
-
-<div class="z-100 grid fixed top-0 left-0 right-0 p-2 border bg-close-light dark:bg-close-dark border-close-b-light dark:border-close-b-dark" style="grid-template-columns: 28% 44% 28%;">
+<div class="navbar z-100 grid fixed top-0 left-0 right-0 p-2 border bg-close-light dark:bg-close-dark border-close-b-light dark:border-close-b-dark">
    <div>
       <a href="/">
          <h2 class="inline-block transition-all font-bold text-xl dark:text-white p-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md hover:cursor-pointer"
