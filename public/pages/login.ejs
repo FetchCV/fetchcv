@@ -8,11 +8,11 @@
 </head>
 <%- include("../partials/navbar.ejs") %>
 <body class="px-8 flex h-[80dvh] justify-center items-center bg-far-light dark:bg-far-dark dark:text-white">
-   <div class="w-96 flex flex-col h-fit m-2 p-2 bg-close-light dark:bg-close-dark border-[1px] border-close-b-light dark:border-close-b-dark rounded-md text-center">
+   <div class="w-96 flex flex-col h-fit m-2 p-2 bg-close-light dark:bg-close-dark border border-close-b-light dark:border-close-b-dark rounded-md text-center">
       <h2 class="m-2 text-xl font-semibold dark:text-white">Login Options</h2>
       <div class="flex justify-center w-full flex-col">
-         <a href="https://github.com/login/oauth/authorize?client_id=<%= client_id %>" class="transition-all py-4 px-4 my-2 w-full border-[1px] bg-close-light dark:bg-close-dark hover:bg-close-h-light hover:dark:bg-close-h-dark border-close-b-light dark:border-close-b-dark rounded-md"><span class="fa fa-github"></span> Sign in with GitHub</a>
-         <a href="" class="transition-all py-4 px-4 w-full text-zinc-500 border-[1px] bg-far-light dark:bg-far-dark hover:bg-far-h-light hover:dark:bg-far-h-dark border-far-b-light dark:border-far-b-dark rounded-md pointer-events-none"><span class="fa fa-gitlab"></span> Sign in with GitLab (Coming Soon)</a>
+         <a href="https://github.com/login/oauth/authorize?client_id=<%= client_id %>" class="transition-all py-4 px-4 my-2 w-full border bg-close-light dark:bg-close-dark hover:bg-close-h-light hover:dark:bg-close-h-dark border-close-b-light dark:border-close-b-dark rounded-md"><span class="fa fa-github"></span> Sign in with GitHub</a>
+         <a href="" class="transition-all py-4 px-4 w-full text-zinc-500 border bg-far-light dark:bg-far-dark hover:bg-far-h-light hover:dark:bg-far-h-dark border-far-b-light dark:border-far-b-dark rounded-md pointer-events-none"><span class="fa fa-gitlab"></span> Sign in with GitLab (Coming Soon)</a>
       </div>
    </div>
 </body>

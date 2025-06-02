@@ -6,7 +6,7 @@
    "scripts": {
       "start": "node app.js",
       "dev": "nodemon app.js",
-      "watch-tailwind": "npx tailwindcss -i ./public/styles/tailwind.config.css -o ./public/styles/tailwind.css --watch",
+      "watch-tailwind": "npx @tailwindcss/cli -i ./public/styles/tailwind.config.css -o ./public/styles/tailwind.css --watch",
       "watch-typescript": "tsc -w",
       "watch": "npm-run-all --parallel watch-tailwind watch-typescript",
       "watch-all": "npm-run-all --parallel dev watch"
@@ -22,12 +22,15 @@
    },
    "homepage": "https://github.com/FetchCV/fetchcv#readme",
    "dependencies": {
+      "@tailwindcss/cli": "^4.1.8",
       "axios": "^1.7.9",
       "dotenv": "^16.4.7",
       "ejs": "^3.1.10",
       "express": "^4.21.2",
       "express-session": "^1.18.1",
-      "mongoose": "^8.9.2"
+      "mongoose": "^8.9.2",
+      "tailwindcss": "^4.1.7",
+      "uuid": "^11.1.0"
    },
    "devDependencies": {
       "nodemon": "^3.1.9",
