@@ -1,3 +1,38 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+   --color-farther-dark: #09090b;
+   --color-farther-light: #d4d4d8;
+   --color-farther-b-dark: #18181b;
+   --color-farther-b-light: #71717a;
+   --color-farther-h-dark: #18181b;
+   --color-farther-h-light: #a1a1aa;
+
+   --color-far-dark: #18181b;
+   --color-far-light: #e4e4e7;
+   --color-far-b-dark: #27272a;
+   --color-far-b-light: #a1a1aa;
+   --color-far-h-dark: #27272a;
+   --color-far-h-light: #d4d4d8;
+
+   --color-close-dark: #27272a;
+   --color-close-light: #f4f4f5;
+   --color-close-b-dark: #3f3f46;
+   --color-close-b-light: #d4d4d8;
+   --color-close-h-dark: #3f3f46;
+   --color-close-h-light: #e4e4e7;
+
+   --color-closer-dark: #3f3f46;
+   --color-closer-light: #fafafa;
+   --color-closer-b-dark: #52525b;
+   --color-closer-b-light: #e4e4e7;
+   --color-closer-h-dark: #52525b;
+   --color-closer-h-light: #f4f4f5;
+
+   --color-theme: #ef4444;
+
+   /* icons are colored depending on who can see them and how important they are */
+   --color-public: #3b82f6;
+   --color-private: #ef4444;
+   --color-tools: #eab308;
+}

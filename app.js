@@ -4,6 +4,8 @@ const axios = require("axios");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const { default: createPlugin } = require("tailwindcss/plugin");
+const uuidv4 = require("uuid").v4;
 
 const app = express();
 require("dotenv").config();
@@ -21,13 +23,23 @@ const userSchema = new mongoose.Schema({
    }
    */
    handle: String,
-   stats: Object /*{
+   stats: Object,
+   postIds: Array /*{
       visitors: Array,
       visits: Number
    } */
 });
 
+const postSchemea = new mongoose.Schema({
+   content: String,
+   author: String, // author mongo id
+   urls: Array,
+   datePosted: Date,
+   stats: Object // views, likes, etc
+});
+
 const User = mongoose.model("User", userSchema);
+const Post = mongoose.model("Post", postSchemea);
 
 // Serve static files from the "public" folder
 app.use(express.static("public"));
@@ -52,6 +64,41 @@ app.get("/", (req, res) => {
    res.render("home");
 });
 
+app.get("/posts", (req, res) => {
+   res.render("pages/posts", { userData: req.session.user });
+});
+
+app.get("/my-posts", (req, res) => {
+   if (!req.session.user) {
+      return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
+   }
+   Post.find({ author: req.session.user.id })
+      .lean()
+      .then(async (posts) => {
+         for (const post of posts) {
+            try {
+               const author = await User.findOne({ githubId: post.author });
+
+               if (author) {
+                  console.log(author)
+                  post.authorName = author.name;
+                  post.authorHandle = author.handle;
+                  post.authorImage = author.profile;
+               }
+            } catch (err) {
+               console.error(`Error fetching author for post ${post._id}:`, err);
+            }
+            post.authorId = post.author;
+         }
+         res.render("pages/my-posts", { posts: posts, userData: req.session.user });
+      })
+      .catch((err) => {
+         console.error("Error fetching posts:", err);
+         res.status(500).json({ message: "Error fetching posts" });
+      });
+
+});
+
 app.get("/profile", (req, res) => {
    if (!req.session.user) {
       return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
@@ -60,9 +107,7 @@ app.get("/profile", (req, res) => {
 });
 
 app.get("/edit-profile", (req, res) => {
-   if (!req.session.user) {
-      return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
-   }
+   if (!req.session.user) return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
    return res.render("pages/profile", { userData: req.session.user });
 });
 
@@ -121,6 +166,7 @@ async function githubOAuthLogin(req, res) {
 }
 
 function createGithubOAuthUser(githubId, req, res) {
+   // this shoudl also save the user name and profile picture url
    const user = new User({
       githubId: githubId,
       handle: req.session.user.login,
@@ -230,9 +276,69 @@ app.get("/search/user/:username", (req, res) => {
       });
 });
 
+// Posts
+app.post("/posts/create", (req, res) => {
+   if (!req.session.user) {
+      console.error("User not logged in");
+      return res.status(401).json({ message: "You need to be logged in to post" });
+   }
+   const post = new Post({
+      content: req.body.content,
+      urls: req.body.urls,
+      datePosted: req.body.datePosted,
+      author: req.session.user.id
+   });
+   post.save().then(() => {
+      res.json({ message: "Post created successfully!" });
+   });
+   User.findOne({ githubId: req.session.user.id })
+      .then((user) => {
+         if (user) {
+            user.postIds.push(post._id);
+            user.markModified("postIds");
+            return user.save();
+         } else {
+            throw new Error("User not found");
+         }
+      })
+      .then((savedUser) => {
+         console.log("Post ID added to user:", savedUser);
+      })
+      .catch((err) => {
+         console.error(err);
+      });
+});
+
+app.get("/posts/get-all", (req, res) => {
+   Post.find({})
+      .lean()
+      .then(async (posts) => {
+         for (const post of posts) {
+            try {
+               const author = await User.findOne({ githubId: post.author });
+
+               if (author) {
+                  console.log(author)
+                  post.authorName = author.name;
+                  post.authorHandle = author.handle;
+                  post.authorImage = author.profile;
+               }
+            } catch (err) {
+               console.error(`Error fetching author for post ${post._id}:`, err);
+            }
+            post.authorId = post.author;
+         }
+         res.json({ posts: posts });
+      })
+      .catch((err) => {
+         console.error("Error fetching posts:", err);
+         res.status(500).json({ message: "Error fetching posts" });
+      });
+});
+
 // Connect app
 app.listen(PORT, () => {
-   console.log("Server is running on port " + PORT);   
+   console.log("Server is running on port " + PORT);
 });
 
 

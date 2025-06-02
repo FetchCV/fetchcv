@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <link rel="stylesheet" href="styles/tailwind.css" />
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+
+   <link rel="icon" type="images/svg" href="images/logo.svg" />
+   <title>Posts | FetchCV</title>
+</head>
+<%- include("../partials/navbar.ejs") %>
+
+   <body class="h-screen bg-far-light dark:bg-far-dark dark:text-white lg:px-[20vw] sm:px-0">
+      <% if (userData) { %>
+         <div
+            class="mx-auto py-6 px-8 my-4 bg-zinc-100 dark:bg-far-h-dark border border-zinc-300 dark:border-zinc-700 rounded-md max-w-[600px]">
+            <form id="create-post-form" onsubmit="createPost(event)">
+               <h2 class="text-lg font-semibold">Make a post</h2>
+               <textarea maxlength="1500" type="text" oninput="autoGrow(this)"
+                  class="create-post-message my-2 p-2 rounded-md w-full resize-none focus:outline-public focus:outline-4"
+                  placeholder="Start writing..." autocomplete="off"></textarea>
+               <input type="file" class="file-input hidden" accept="image/*,video/*" multiple>
+               <div id="upload-preview-area"
+                  class="bg-close-h-light dark:bg-close-h-dark my-1 rounded-md p-4 text-close-b-dark dark:text-close-b-light text-center hover:inset-shadow-sm shadow-close-h-dark transition-all"
+                  ondrop="dropHandler(event)" ondragover="dragOverHandler(event)" ondragleave="dragLeaveHandler(event)"
+                  onclick="document.querySelector('.file-input').click()">Upload an image or video</div>
+               <div class="alert hidden p-2 my-2 bg-red-100 border border-red-400 text-red-700 rounded-md"></div>
+               <button type="submit"
+                  class="transition-all p-2 my-0.5 border bg-close-light dark:bg-close-dark hover:bg-close-h-light hover:dark:bg-close-h-dark border-close-b-light dark:border-close-b-dark rounded-md float-right">make
+                  a post</button>
+               <br><br>
+            </form>
+         </div>
+      <% } %>
+      <div class="posts"></div>
+      <a href="/my-posts">
+         <div
+            class="mx-auto py-6 px-8 my-4 bg-zinc-100 dark:bg-far-h-dark border border-zinc-300 dark:border-zinc-700 rounded-md max-w-[600px] text-center underline text-public cursor-pointer">
+            View your posts</div>
+      </a>
+      <hr style="opacity: 0" class="my-4">
+   </body>
+   <% if (userData) { %>
+      <script src="scripts/posts/imageUpload.js"></script>
+   <% } %>
+   <script src="scripts/posts/createPost.js"></script>
+   <script src="scripts/posts/loadPosts.js"></script>
+</html>
