@@ -73,24 +73,30 @@ app.get("/my-posts", (req, res) => {
       return res.render("pages/login", { client_id: process.env.GITHUB_CLIENT_ID });
    }
    Post.find({ author: req.session.user.id })
-      .populate('author', 'handle profile.avatar_url') // Populate the 'author' field, selecting 'handle' and 'profile.avatar_url'
-      .then((posts) => {
-         const postsWithAuthorInfo = posts.map(post => ({
-            _id: post._id,
-            content: post.content,
-            urls: post.urls,
-            authorId: post.author,
-            authorName: post.author ? post.author.handle : "Unknown",
-            authorImage: post.author && post.author.profile ? post.author.profile.avatar_url : undefined,
-            datePosted: post.datePosted,
-            stats: post.stats
-         }));
-         res.render("pages/my-posts", { posts: postsWithAuthorInfo, userData: req.session.user });
+      .lean()
+      .then(async (posts) => {
+         for (const post of posts) {
+            try {
+               const author = await User.findOne({ githubId: post.author });
+
+               if (author) {
+                  console.log(author)
+                  post.authorName = author.name;
+                  post.authorHandle = author.handle;
+                  post.authorImage = author.profile;
+               }
+            } catch (err) {
+               console.error(`Error fetching author for post ${post._id}:`, err);
+            }
+            post.authorId = post.author;
+         }
+         res.render("pages/my-posts", { posts: posts, userData: req.session.user });
       })
       .catch((err) => {
-         console.error(err);
+         console.error("Error fetching posts:", err);
          res.status(500).json({ message: "Error fetching posts" });
       });
+
 });
 
 app.get("/profile", (req, res) => {
